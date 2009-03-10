@@ -14,12 +14,12 @@ end
 ########## Git Setup ##########
 
 # Remove tmp directories
-%q[tmp/pids tmp/sessions tmp/sockets tmp/cache].each do |f|
+%w[tmp/pids tmp/sessions tmp/sockets tmp/cache].each do |f|
   run("rmdir #{f}")
 end
 
 # Delete unnecessary files.
-%w{doc/README_FOR_APP public/index.html public/favicon.ico public/robots.txt}.each do |f|
+%w[doc/README_FOR_APP public/index.html public/favicon.ico public/robots.txt].each do |f|
   run("rm #{f}")
 end
 
@@ -52,6 +52,8 @@ CODE
 # Initialize git repository
 git :init
 
+########## Dependecies Setup ##########
+
 # Add plugins.
 # plugin 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true
 
@@ -61,11 +63,6 @@ git :init
 gem "webrat"
 gem "cucumber"
 gem "authlogic"
-
-# Send initial commit
-#git :add => "."
-
-#git :commit => "-a -m 'Setting up a new rails app.'"
 
 ########## Authlogic Setup ##########
 
@@ -99,6 +96,10 @@ run "cp #{base_dir}/app/views/user_sessions/new.html.erb app/views/user_sessions
 # Modify layouts
 run "cp #{base_dir}/app/views/layouts/application.html.erb app/views/layouts/"
 run 'rm app/views/layouts/users.html.erb'
+
+# Send initial commit
+git :add => "."
+git :commit => "-a -m 'Setting up a new rails app.'"
 
 # Create database
 rake "db:migrate"
