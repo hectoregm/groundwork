@@ -57,18 +57,44 @@ git :init
 # Add plugins.
 # plugin 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true
 
-# Install gem'
-#gem "dchelimsky-rspec", :lib => false, :version => "1.1.99.7"
-#gem "dchelimsky-rspec-rails", :lib => false, :version => ">= 1.1.99.7"
-gem "webrat"
-gem "cucumber"
+# Install gems
+gem "dchelimsky-rspec", :lib => false, :env => 'test'
+gem "dchelimsky-rspec-rails", :lib => false, :env => 'test'
+gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test'
+gem 'notahat-machinist', :lib => 'machinist', :env => 'test'
+gem "webrat",:env => 'test'
+gem "aslakhellesoy-cucumber", :lib => 'cucumber', :env => 'test'
 gem "authlogic"
+
+# Hack because of bug in template code
+run("sed -e \"s/'false'/false/\" -i config/environments/test.rb")
+
+
+########## Dependecies Install ##########
+rake 'gems:install', :sudo => true
+
+##########  Testing Environment Setup ##########
+generate :cucumber
+generate :rspec
+generate :forgery
+
+# Get cucumber config and task files
+run("cp #{base_dir}/cucumber.yml ./")
+run("cp #{base_dir}/lib/tasks/cucumber.rake lib/tasks")
+
+# Integrate machinist to rspec and cucumber
+run("cp #{base_dir}/spec/spec_helper.rb spec/")
+run("cp #{base_dir}/spec/blueprints.rb spec/")
+run("echo \"require File.join(Rails.root, 'spec', 'blueprints')\" >> features/support/env.rb")
+
+# Get autotest config file.
+run "cp #{base_dir}/.autotest ./"
 
 ########## Authlogic Setup ##########
 
 generate :session, "user_session"
-generate :controller, "user_sessions"
-generate :scaffold, "users", "login:string", "crypted_password:string",
+generate :rspec_controller, "user_sessions"
+generate :rspec_scaffold, "user", "login:string", "crypted_password:string",
 "password_salt:string", "persistence_token:string", "login_count:integer",
 "last_request_at:datetime", "last_login_at:datetime", "current_login_at:datetime",
 "last_login_ip:string", "current_login_ip:string"
@@ -97,9 +123,14 @@ run "cp #{base_dir}/app/views/user_sessions/new.html.erb app/views/user_sessions
 run "cp #{base_dir}/app/views/layouts/application.html.erb app/views/layouts/"
 run 'rm app/views/layouts/users.html.erb'
 
+# Get authentication related cucumber features
+run "cp -a #{base_dir}/features/registration features/"
+run "cp -a #{base_dir}/features/authentication features/"
+
 # Send initial commit
 git :add => "."
 git :commit => "-a -m 'Setting up a new rails app.'"
 
 # Create database
-rake "db:migrate"
+rake 'db:migrate'
+rake 'db:test:load'
