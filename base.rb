@@ -67,11 +67,13 @@ gem "aslakhellesoy-cucumber", :lib => 'cucumber', :env => 'test'
 gem "authlogic"
 
 # Hack because of bug in template code
-run("sed -e \"s/'false'/false/\" -i config/environments/test.rb")
+run("sed -e \"s/'false'/false/\" config/environments/test.rb > test.rb")
+run("mv test.rb config/environments/test.rb")
 
 
 ########## Dependecies Install ##########
 rake 'gems:install', :sudo => true
+rake 'gems:install', :sudo => true, :env => 'test'
 
 ##########  Testing Environment Setup ##########
 generate :cucumber
@@ -124,8 +126,8 @@ run "cp #{base_dir}/app/views/layouts/application.html.erb app/views/layouts/"
 run 'rm app/views/layouts/users.html.erb'
 
 # Get authentication related cucumber features
-run "cp -a #{base_dir}/features/registration features/"
-run "cp -a #{base_dir}/features/authentication features/"
+run "cp -Rp #{base_dir}/features/registration features/"
+run "cp -Rp #{base_dir}/features/authentication features/"
 
 # Send initial commit
 git :add => "."
