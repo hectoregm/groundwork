@@ -74,7 +74,7 @@ gem "dchelimsky-rspec", :lib => false, :env => 'test'
 gem "dchelimsky-rspec-rails", :lib => false, :env => 'test'
 gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test'
 gem 'notahat-machinist', :lib => 'machinist', :env => 'test'
-gem "webrat",:env => 'test'
+gem "hectoregm-webrat", :lib => 'webrat', :env => 'test'
 gem "aslakhellesoy-cucumber", :lib => 'cucumber', :env => 'test'
 gem "authlogic"
 
