@@ -3,12 +3,24 @@
 
 ########## Initial Setup ##########
 
-# Base dir of code.
-base_dir = '~/Projects/github/rails-templates/base'
+# Get environment variables
+begin
+  base_dir = ENV['BASE_PATH']
+  edge_dir = ENV['EDGE_PATH']
+  app_dir = Dir.pwd
+  app_name = File.basename app_dir
+  raise ScriptError, "Please setup env variables BASE_PATH and EDGE_PATH:" if base_dir.nil? or edge_dir.nil?
+rescue ScriptError => e
+  puts e.message
+  puts "$ export EDGE_PATH=<path to edge rails directory>"
+  puts "$ export BASE_PATH=<path to rails-template/base directory>"
+  run("rm -rf #{app_dir}")
+  Kernel::exit(1)
+end
 
 # Get rails edge code.
 inside('vendor') do
-  run "ln -s ~/Projects/github/rails rails"
+  run "ln -s #{edge_dir} rails"
 end
 
 ########## Git Setup ##########
