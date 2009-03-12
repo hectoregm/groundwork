@@ -79,9 +79,7 @@ gem "aslakhellesoy-cucumber", :lib => 'cucumber', :env => 'test'
 gem "authlogic"
 
 # Hack because of bug in template code
-run("sed -e \"s/'false'/false/\" config/environments/test.rb > test.rb")
-run("mv test.rb config/environments/test.rb")
-
+gsub_file('config/environments/test.rb', /'false'/, 'false')
 
 ########## Dependecies Install ##########
 rake 'gems:install', :sudo => true
@@ -99,7 +97,7 @@ run("cp #{base_dir}/lib/tasks/cucumber.rake lib/tasks")
 # Integrate machinist to rspec and cucumber
 run("cp #{base_dir}/spec/spec_helper.rb spec/")
 run("cp #{base_dir}/spec/blueprints.rb spec/")
-run("echo \"require File.join(Rails.root, 'spec', 'blueprints')\" >> features/support/env.rb")
+append_file('features/support/env.rb', "require File.join(Rails.root, 'spec', 'blueprints')\n")
 
 # Get autotest config file.
 run "cp #{base_dir}/.autotest ./"
