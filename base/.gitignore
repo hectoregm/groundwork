@@ -1,0 +1,16 @@
+.#*
+*~
+*#
+config/database.yml
+config/mongrel_cluster.yml
+coverage
+db/schema.rb
+db/*.sqlite3
+doc/api
+doc/app
+.DS_Store
+log/*.log
+log/*.pid
+*.swp
+tmp/**/*
+vendor/rails

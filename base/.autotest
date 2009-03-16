@@ -1,9 +1,14 @@
 require 'autotest/redgreen'
 
+Autotest.add_hook :initialize do |at|
+  at.add_exception(".git")
+  at.add_exception("coverage")
+end
+
 module Autotest::GnomeNotify
 
   # Time notification will be displayed before disappearing automatically
-  EXPIRATION_IN_SECONDS = 2
+  EXPIRATION_IN_SECONDS = 5
   ERROR_STOCK_ICON = "gtk-dialog-error"
   SUCCESS_STOCK_ICON = "gtk-dialog-info"
 
