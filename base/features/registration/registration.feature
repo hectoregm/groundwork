@@ -38,19 +38,19 @@ Then I should have an unsuccessful registration
       | hector | hector@mail.com |  secret  |                       |
       | hector | hector@mail.com |  secret  |   sec                 |
 
-Scenario: Account must be activated before login is allowed
-Given "hector" an unactivated user
+Scenario: Account must be confirmed before login is allowed
+Given "hector" an unconfirmed user
 When I go to the account page
 Then I should not see my account page
 
 Scenario: Send a mail activation at a successful account creation
-Given "hector" an unactivated user
+Given "hector" an unconfirmed user
 And I receive an email
 When I open the email
 Then I should see "confirm" in the email
 
-Scenario: Activate account using mail activation token
-Given "hector" an unactivated user
+Scenario: Confirm account using mail activation token
+Given "hector" an unconfirmed user
 When I receive an email
 And I open the email
 Then I should see "confirm" in the email
@@ -58,10 +58,35 @@ When I follow "confirm" in the email
 Then I should see "Account confirmed!"
 And I should see my account page
 
-Scenario: Do not activate account with invalid mail activation token
-Given "hector" an unactivated user 
+Scenario: Do not confirm an account with invalid mail activation token
+Given "hector" an unconfirmed user
 When I go to the confirm page with bad token
 Then I should not see my account page
 
-# Scenario: Not allow login of an unactivated user
-# Scenario: Allow login of an activated user
+Scenario: Not allow login of an unconfirmed user
+Given "hector" an unconfirmed user
+When I go to the login page
+And I fill in "login" with "hector"
+And I fill in "password" with "secret"
+And I press "Login"
+Then I should not see my account page
+And I should see "not confirmed"
+
+Scenario: Send a welcome mail when user confirms account
+Given "hector" an unconfirmed user
+And I receive an email
+And I open the email
+And I should see "confirm" in the email
+When I follow "confirm" in the email
+Then I should see my account page
+And I should have 2 emails
+Then I open the most recent email
+And I should see "Welcome" in the subject
+
+Scenario: Allow login of an confirmed user
+Given "hector" a confirmed user
+When I go to the login page
+And I fill in "login" with "hector"
+And I fill in "password" with "secret"
+And I press "Login"
+Then I should see my account page

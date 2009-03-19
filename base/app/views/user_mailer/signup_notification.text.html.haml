@@ -2,13 +2,16 @@
 %html
   %head
   %body
-    %p Your account needs to be confirmed
-
+    %p Welcome to APP
     %p
-      = "Username: " + @user.login
+      A new account was requested from this email address.
+      %br
+      If this is correct, please go to this web address:
     %p
+      = confirm_account_url(:token => @user.perishable_token)
+    %p Your login credentials are:
+    %p
+      = "Login: " + @user.login
+      %br
       = "Password: " + @user.password
 
-    %p
-      To confirm your account please
-      = link_to "confirm", confirm_account_url(:token => @user.perishable_token)

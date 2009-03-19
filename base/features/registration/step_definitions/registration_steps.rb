@@ -2,7 +2,7 @@ Given /"(.*)" is an anonymous user/ do |name|
   visit '/logout'
 end
 
-Given /"(.*)" an unactivated user/ do |name|
+Given /"(.*)" an unconfirmed user/ do |name|
   When "I go to the registration form"
   And "I fill in \"login\" with \"#{name}\""
   And "I fill in \"email\" with \"#{name}@mail.com\""
@@ -10,6 +10,16 @@ Given /"(.*)" an unactivated user/ do |name|
   And "I fill in \"password confirmation\" with \"secret\""
   When "I press \"Register\""
   Then "I should have a successful registration"
+end
+
+Given /"(.*)" a confirmed user/ do |name|
+  Given "\"#{name}\" an unconfirmed user"
+  And "I receive an email"
+  And "I open the email"
+  And "I should see \"confirm\" in the email"
+  When "I follow \"confirm\" in the email"
+  Then "I should see my account page"
+  visit '/logout'
 end
 
 Then /^I should see the registration form$/ do

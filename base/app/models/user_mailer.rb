@@ -3,14 +3,12 @@ class UserMailer < ActionMailer::Base
   default_url_options[:host] = 'www.example.com'
   def signup_notification(user)
     setup_email(user)
-    @subject    += 'Please activate you account'
-    @body[:url]  = "<a href=\"http://host.test/activate\">Confirm</a>"
+    @subject    += 'Please confirm your account.'
   end
 
   def activation(user)
     setup_email(user)
-    @subject    += 'Your account has been confirmed.'
-    @body[:url]  = "http://www#{DOMAIN}/"
+    @subject    += 'Welcome to app.'
   end
 
   def forgot_password(user)

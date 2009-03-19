@@ -14,6 +14,9 @@ module NavigationHelpers
     when /the confirm page with bad token/
       confirm_account_path
 
+    when /the login page/
+      login_path
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path."
     end
