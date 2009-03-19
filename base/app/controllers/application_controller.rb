@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  helper :all
+  protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
 
@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless current_user
-      store_location
+      # No redirect if requested page is /logout
+      store_location if !(request.request_uri =~ /\/logout$/)
       flash[:notice] = "You must be logged in to access this page"
       redirect_to new_user_session_url
       return false

@@ -1,0 +1,14 @@
+!!! Strict
+%html
+  %head
+  %body
+    %p Your account needs to be confirmed
+
+    %p
+      = "Username: " + @user.login
+    %p
+      = "Password: " + @user.password
+
+    %p
+      To confirm your account please
+      = link_to "confirm", confirm_account_url(:token => @user.perishable_token)

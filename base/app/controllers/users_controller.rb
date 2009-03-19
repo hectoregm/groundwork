@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
+  before_filter :require_no_user, :only => [:new, :create, :confirm]
   before_filter :require_user, :only => [:show, :edit, :update]
 
   def new
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Registration completed!"
-      redirect_back_or_default account_url
+      redirect_to root_url
     else
       render :action => :new
     end
@@ -25,12 +25,26 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    @user = @current_user
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to account_url
     else
       render :action => :edit
+    end
+  end
+
+  def confirm
+    @user = User.find_using_perishable_token(params[:token])
+
+    if @user
+      @user.send(:confirm!)
+      UserSession.create(@user)
+
+      flash[:notice] = "Account confirmed!"
+      redirect_to account_url
+    else
+      redirect_to root_url
     end
   end
 end

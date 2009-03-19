@@ -59,6 +59,11 @@ def spec(filename)
   file("spec/#{filename}", get_source("spec/#{filename}"), false)
 end
 
+def feature(filename)
+  log 'feature', filename
+  file("features/#{filename}", get_source("features/#{filename}"), false)
+end
+
 def model(filename)
   log 'model', filename
   file("app/models/#{filename}", get_source("app/models/#{filename}"), false)
@@ -121,9 +126,11 @@ gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => "http://g
 gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
 gem 'hectoregm-webrat', :lib => 'webrat', :env => 'test', :source => "http://gems.github.com"
 gem 'aslakhellesoy-cucumber', :lib => 'cucumber', :env => 'test', :source => "http://gems.github.com"
-gem "spicycode-rcov", :lib => 'rcov', :env => 'test', :source => "http://gems.github.com"
-gem "haml"
-gem "authlogic"
+gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => "http://gems.github.com"
+gem 'carlosbrando-remarkable', :lib => 'remarkable', :source => "http://gems.github.com"
+gem 'bmabey-email_spec', :lib => 'email_spec', :source => "http://gems.github.com"
+gem 'haml'
+gem 'authlogic'
 
 ########## Dependecies Install ##########
 rake 'gems:install', :sudo => true
@@ -132,16 +139,24 @@ rake 'gems:install', :sudo => true, :env => 'test'
 ##########  Testing Environment Setup ##########
 generate :cucumber
 generate :rspec
+generate :email_spec
 generate :forgery
 
-# Get cucumber config and task files
-root_config "cucumber.yml"
-rakefile "cucumber.rake", get_source("lib/tasks/cucumber.rake")
+# Configuration rspec
+spec 'spec.opts'
+spec 'spec_helper.rb'
+spec 'blueprints.rb'
+spec 'lib/spec_controller_helper.rb'
 
-# Integrate machinist to rspec and cucumber
-spec "spec_helper.rb"
-spec "blueprints.rb"
-append_file('features/support/env.rb', "require File.join(Rails.root, 'spec', 'blueprints')\n")
+# Configuration cucumber
+root_config 'cucumber.yml'
+feature 'support/env.rb'
+feature 'support/paths.rb'
+rakefile 'cucumber.rake', get_source('lib/tasks/cucumber.rake')
+
+# Email testing setup
+feature 'step_definitions/custom_email_steps.rb'
+feature 'step_definitions/email_steps.rb'
 
 # Get autotest config file.
 root_config ".autotest"
@@ -154,20 +169,27 @@ initializer "action_mailer.rb", get_source("config/initializers/action_mailer.rb
 
 ########## Authlogic Setup ##########
 
-generate :session, "user_session"
-generate :rspec_controller, "user_sessions"
-generate :rspec_scaffold, "user", "login:string", "crypted_password:string",
-"password_salt:string", "persistence_token:string", "login_count:integer",
-"last_request_at:datetime", "last_login_at:datetime", "current_login_at:datetime",
-"last_login_ip:string", "current_login_ip:string"
+# Rspec helper for authlogic
+spec 'lib/spec_authlogic_helper.rb'
 
-# Create routes for UserSession and Users (with Account singular alias)
-route "map.resource :user_session, :users"
-route "map.resource :account, :controller => \"users\""
-route "map.root :controller => \"user_sessions\", :action => \"new\""
+generate :session, "user_session"
+
+# Create routes
+log 'route', 'config/routes.rb'
+file('config/routes.rb', get_source('config/routes.rb'), false)
+
+# Get migration
+log 'migrate', 'db/migrate/create_users.rb'
+file('db/migrate/20090316040456_create_users.rb',
+     get_source('db/migrate/20090316040456_create_users.rb'), false)
 
 # Get models
 model "user.rb"
+model "user_mailer.rb"
+model "user_observer.rb"
+
+# Add observer
+gsub_file('config/environment.rb', /#\s*(config.active_record.observers =) :cacher, :garbage_collector, :forum_observer/, '\1 :user_observer')
 
 # Get controllers
 controller "application_controller.rb"
@@ -175,19 +197,26 @@ controller "user_sessions_controller.rb"
 controller "users_controller.rb"
 
 # Get views
-view "users", "new.html.erb"
-view "users", "edit.html.erb"
-view "users", "_form.html.erb"
-view "users", "show.html.erb"
+view "users", "new.html.haml"
+view "users", "edit.html.haml"
+view "users", "_form.html.haml"
+view "users", "show.html.haml"
 view "user_sessions", "new.html.erb"
+view "user_mailer", "activation.text.html.haml"
+view "user_mailer", "forgot_password.text.html.haml"
+view "user_mailer", "reset_password.text.html.haml"
+view "user_mailer", "signup_notification.text.html.haml"
 
 # Modify layouts
-layout "application.html.erb"
-rm "app/views/layouts/users.html.erb"
+layout "application.html.haml"
 
 # Get authentication related cucumber features
 cp_r "features/registration", "features"
 cp_r "features/authentication", "features"
+
+# Get rspec tests
+spec 'models/user_spec.rb'
+spec 'controllers/users_controller_spec.rb'
 
 # Send initial commit
 git :add => "."

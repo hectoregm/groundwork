@@ -13,4 +13,5 @@ log/*.log
 log/*.pid
 *.swp
 tmp/**/*
+tmp/*.html
 vendor/rails
