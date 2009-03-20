@@ -217,6 +217,7 @@ cp_r "features/authentication", "features"
 # Get rspec tests
 spec 'models/user_spec.rb'
 spec 'controllers/users_controller_spec.rb'
+spec 'controllers/user_sessions_controller_spec.rb'
 
 # Send initial commit
 git :add => "."

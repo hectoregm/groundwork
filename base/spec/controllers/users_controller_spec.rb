@@ -3,11 +3,7 @@ include SpecControllerHelper
 
 describe UsersController do
 
-  def mock_user(stubs={})
-    @mock_user ||= mock_model(User, stubs)
-  end
-
-  describe "GET new" do
+  describe "new" do
 
     it_should_behave_like "an action that requires logged out user"
 
@@ -28,7 +24,7 @@ describe UsersController do
 
   end
 
-  describe "GET edit" do
+  describe "edit" do
 
     it_should_behave_like "an action that requires logged in user"
 
@@ -37,20 +33,20 @@ describe UsersController do
     end
 
     it "should grab account information" do
-      user = log_user :login => "hector"
+      mock_log_user(mock_user)
       get :edit
-      should assign_to(:user, :with => user)
+      should assign_to(:user, :with => mock_user)
     end
 
     it do
-      log_user :login => "hector"
+      mock_log_user(mock_user)
       get :edit
       should render_template(:edit)
     end
 
   end
 
-  describe "POST create" do
+  describe "create" do
 
     it_should_behave_like "an action that requires logged out user"
 
@@ -120,7 +116,7 @@ describe UsersController do
 
   end
 
-  describe "GET show" do
+  describe "show" do
 
     it_should_behave_like "an action that requires logged in user"
 
@@ -129,20 +125,20 @@ describe UsersController do
     end
 
     it "should get account information" do
-      user = log_user :login => "hector"
+      mock_log_user(mock_user)
       get :show
-      should assign_to(:user, :with => user)
+      should assign_to(:user, :with => mock_user)
     end
 
     it do
-      log_user :login => "hector"
+      mock_log_user(mock_user)
       get :show
       should render_template(:show)
     end
 
   end
 
-  describe "PUT update" do
+  describe "update" do
 
     it_should_behave_like "an action that requires logged in user"
 
@@ -153,7 +149,8 @@ describe UsersController do
     describe "with valid input" do
 
       before(:each) do
-        @user = log_user :login => "hector"
+        @user = mock_user(:update_attributes => true, :valid? => true)
+        mock_log_user(@user)
       end
 
       it "should update account information" do
@@ -183,7 +180,7 @@ describe UsersController do
     describe "with invalid input" do
 
       before(:each) do
-        @user = log_user :login => "hector"
+        mock_log_user(mock_user(:update_attributes => false, :valid? => false))
       end
 
       it "should not update account information" do
@@ -202,7 +199,7 @@ describe UsersController do
 
   end
 
-  describe "GET confirm" do
+  describe "confirm" do
 
     it_should_behave_like "an action that requires logged out user"
 

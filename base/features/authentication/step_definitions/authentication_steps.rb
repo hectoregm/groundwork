@@ -1,12 +1,13 @@
-When /^I register$/ do
-  When 'I follow "Register"'
-  When 'I fill in the registration form'
+Then /^I should see a login form$/ do
+  response.should contain("Login")
+  response.should contain("Password")
+  response.should contain("Remember me")
 end
 
-Then /^I should be logged in$/ do
-  Then 'I should see "Registration completed!"'
-end
-
-Given /^I am a user not logged in$/ do
-  User.make(:login => 'Mono', :password => 'newton', :password_confirmation => 'newton')
+Given /^"(.*)" a logged in user$/ do |name|
+  Given "\"#{name}\" a confirmed user"
+  When "I fill in \"login\" with \"hector\""
+  And "I fill in \"password\" with \"secret\""
+  And "I press \"Login\""
+  Then "I should see my account page"
 end
