@@ -43,7 +43,7 @@ describe UserSessionsController do
         valid_credentials
 
         post :create, :user_session => {}
-        should set_the_flash("Login successful!")
+        should set_the_flash(:to => "Login successful!")
       end
 
       it "should redirect to account page" do
@@ -80,7 +80,7 @@ describe UserSessionsController do
         invalid_credentials
 
         post :create, :user_session => {}
-        should_not set_the_flash('Login successful!')
+        should_not set_the_flash(:to => 'Login successful!')
       end
 
       def invalid_credentials
@@ -111,7 +111,7 @@ describe UserSessionsController do
       common_behavior
 
       post :destroy
-      should set_the_flash('Logout successful!')
+      should set_the_flash(:to => 'Logout successful!')
     end
 
     it "should redirect to login page" do

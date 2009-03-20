@@ -6,4 +6,5 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users", :member => { :confirm => :get }
   map.resource :user_session, :users
   map.resources :users
+  map.resource :password_reset
 end

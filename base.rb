@@ -195,6 +195,7 @@ gsub_file('config/environment.rb', /#\s*(config.active_record.observers =) :cach
 controller "application_controller.rb"
 controller "user_sessions_controller.rb"
 controller "users_controller.rb"
+controller "password_resets_controller.rb"
 
 # Get views
 view "users", "new.html.haml"
@@ -206,6 +207,7 @@ view "user_mailer", "activation.text.html.haml"
 view "user_mailer", "forgot_password.text.html.haml"
 view "user_mailer", "reset_password.text.html.haml"
 view "user_mailer", "signup_notification.text.html.haml"
+view "password_resets", "new.html.haml"
 
 # Modify layouts
 layout "application.html.haml"
@@ -213,11 +215,13 @@ layout "application.html.haml"
 # Get authentication related cucumber features
 cp_r "features/registration", "features"
 cp_r "features/authentication", "features"
+cp_r "features/password_reset", "features"
 
 # Get rspec tests
 spec 'models/user_spec.rb'
 spec 'controllers/users_controller_spec.rb'
 spec 'controllers/user_sessions_controller_spec.rb'
+spec 'controllers/password_resets_controller_spec.rb'
 
 # Send initial commit
 git :add => "."

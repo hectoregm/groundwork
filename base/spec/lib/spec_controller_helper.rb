@@ -20,7 +20,7 @@ module SpecControllerHelper
       it "should have /must be logged out/ in the flash with logged in user" do
         log_user :login => "hector"
         get @action
-        should set_the_flash(/must be logged out/)
+        should set_the_flash(:to => /must be logged out/)
       end
 
     end
@@ -42,7 +42,7 @@ module SpecControllerHelper
 
       it "should have /must be logged in/ in the flash with logged out user" do
         get @action
-        should set_the_flash(/must be logged in/)
+        should set_the_flash(:to => /must be logged in/)
       end
 
     end

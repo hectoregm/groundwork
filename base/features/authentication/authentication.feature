@@ -49,11 +49,5 @@ And I press "Login"
 Then I should not be logged in
 And I should see "not confirmed"
 
-Scenario: Allow a confirmed user to login and be remembered
-Given "hector" a confirmed user with password "secret"
-When I go to the login page
-And I fill in "login" with "hector"
-And I fill in "password" with "secret"
-And I check "Remember me"
-And I press "Login"
-Then I should be logged in
+# TODO: Make a scenario to test remember me feature
+#Scenario: Allow a confirmed user to login and be remembered

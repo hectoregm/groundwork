@@ -16,6 +16,8 @@ module NavigationHelpers
 
     when /the login page/
       login_path
+    when /the reset password page/
+      new_password_reset_path
 
     else
       raise "Can't find mapping from \"#{page_name}\" to a path."

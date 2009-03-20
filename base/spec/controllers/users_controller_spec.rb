@@ -79,7 +79,7 @@ describe UsersController do
         User.should_receive(:new).and_return(@user)
 
         post :create, :user => @attributes
-        should set_the_flash(/completed!/)
+        should set_the_flash(:to => /completed!/)
       end
 
       it do
@@ -167,7 +167,7 @@ describe UsersController do
 
       it do
         put :update
-        should set_the_flash(/updated!/)
+        should set_the_flash(:to => /updated!/)
       end
 
       it do
