@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class UserMailer < ActionMailer::Base
   default_url_options[:host] = 'www.example.com'
+
   def signup_notification(user)
     setup_email(user)
     @subject += 'Please confirm your account'
@@ -11,24 +12,17 @@ class UserMailer < ActionMailer::Base
     @subject += 'Welcome'
   end
 
-  def forgot_password(user)
+  def reset_password_instructions(user)
     setup_email(user)
     @subject += 'You have asked to reset your password.'
-    @body[:url] = "http://app#{DOMAIN}/reset_password/#{token}"
-  end
-
-  #FIXME: Reseteado es español?
-  def reset_password(user)
-    setup_email(user)
-    @subject += 'Your password has been reset.'
   end
 
   protected
   def setup_email(user)
-    @recipients  = "#{user.email}"
-    @from        = "admin@example.com"
-    @subject     = "[APP] "
-    @sent_on     = Time.now
-    @body[:user] = user
+    recipients user.email
+    from       "APP Notifications <notifications@example.com>"
+    @subject   = "[APP] "
+    sent_on    Time.now
+    body :user => user
   end
 end

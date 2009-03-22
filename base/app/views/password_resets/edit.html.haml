@@ -1,0 +1,15 @@
+%h1 Change Password
+
+- form_for @user, :url => password_reset_path(:token => params[:token]), :method => :put do |f|
+  = f.error_messages
+  = f.label :password
+  %br
+  = f.text_field :password
+  %br
+  %br
+  = f.label :password_confirmation
+  %br
+  = f.text_field :password_confirmation
+  %br
+  %br
+  = f.submit "Update Password"

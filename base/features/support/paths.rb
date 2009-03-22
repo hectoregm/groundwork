@@ -19,6 +19,9 @@ module NavigationHelpers
     when /the reset password page/
       new_password_reset_path
 
+    when /the change password form with bad token/
+      edit_password_reset_path
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path."
     end

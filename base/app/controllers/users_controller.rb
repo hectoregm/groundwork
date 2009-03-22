@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     @user = User.find_using_perishable_token(params[:token])
 
     if @user
-      @user.send(:confirm!)
+      @user.confirm!
       UserSession.create(@user)
 
       flash[:notice] = "Account confirmed!"

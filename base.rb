@@ -75,7 +75,7 @@ def controller(filename)
 end
 
 def view(controller, filename)
-  log 'view', filename
+  log 'view', "#{filename} for #{controller}"
   file("app/views/#{controller}/#{filename}", get_source("app/views/#{controller}/#{filename}"), false)
 end
 
@@ -204,10 +204,10 @@ view "users", "_form.html.haml"
 view "users", "show.html.haml"
 view "user_sessions", "new.html.erb"
 view "user_mailer", "activation.text.html.haml"
-view "user_mailer", "forgot_password.text.html.haml"
-view "user_mailer", "reset_password.text.html.haml"
+view "user_mailer", "reset_password_instructions.text.html.haml"
 view "user_mailer", "signup_notification.text.html.haml"
 view "password_resets", "new.html.haml"
+view "password_resets", "edit.html.haml"
 
 # Modify layouts
 layout "application.html.haml"

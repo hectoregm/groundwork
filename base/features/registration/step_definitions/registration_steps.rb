@@ -29,6 +29,7 @@ Given /^"(.*)" a confirmed user$/ do |name|
   And "I should see \"confirm\" in the email"
   When "I follow \"confirm\" in the email"
   Then "I should see my account page"
+  Then "a clear email queue"
   visit '/logout'
 end
 
