@@ -6,13 +6,11 @@
 # Get environment variables
 begin
   base_dir = ENV['BASE_PATH']
-  edge_dir = ENV['EDGE_PATH']
   app_dir = Dir.pwd
   app_name = File.basename app_dir
-  raise ScriptError, "Please setup env variables BASE_PATH and EDGE_PATH:" if base_dir.nil? or edge_dir.nil?
+  raise ScriptError, "Please setup env variable BASE_PATH" if base_dir.nil?
 rescue ScriptError => e
   puts e.message
-  puts "$ export EDGE_PATH=<path to edge rails directory>"
   puts "$ export BASE_PATH=<path to rails-template/base directory>"
   run("rm -rf #{app_dir}")
   Kernel::exit(1)
@@ -84,12 +82,6 @@ def layout(filename)
   file("app/views/layouts/#{filename}", get_source("app/views/layouts/#{filename}"), false)
 end
 
-# Get rails edge code.
-inside('vendor') do
-  log('link', 'edge rails')
-  run("ln -s #{edge_dir} rails", false)
-end
-
 ########## Git Setup ##########
 
 # Remove tmp directories
@@ -122,13 +114,13 @@ git :init
 # Install gems
 gem "rspec", :lib => false, :env => 'test'
 gem "rspec-rails", :lib => false, :env => 'test'
-gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => "http://gems.github.com"
-gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
-gem 'hectoregm-webrat', :lib => 'webrat', :env => 'test', :source => "http://gems.github.com"
+gem 'webrat', :lib => 'webrat', :env => 'test'
 gem 'aslakhellesoy-cucumber', :lib => 'cucumber', :env => 'test', :source => "http://gems.github.com"
 gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => "http://gems.github.com"
-gem 'carlosbrando-remarkable', :lib => 'remarkable', :source => "http://gems.github.com"
-gem 'bmabey-email_spec', :lib => 'email_spec', :source => "http://gems.github.com"
+gem 'carlosbrando-remarkable', :lib => 'remarkable', :env => 'test', :source => "http://gems.github.com"
+gem 'bmabey-email_spec', :lib => 'email_spec', :env => 'test', :source => "http://gems.github.com"
+gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => "http://gems.github.com"
+gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
 gem 'haml'
 gem 'authlogic'
 
