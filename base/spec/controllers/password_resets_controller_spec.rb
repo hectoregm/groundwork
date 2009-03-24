@@ -121,14 +121,13 @@ describe PasswordResetsController do
 
         before(:each) do
           User.stub!(:find_using_perishable_token).with("validtoken").and_return(mock_user)
-          mock_user.stub!({ :validate_password= => true, :save => true})
-          mock_user.stub!(:password=)
-          mock_user.stub!(:password_confirmation=)
+          mock_user.stub!(:validate_password= => true)
+          mock_user.stub!(:update_attributes).and_return(true)
         end
 
         it "should update password" do
           User.should_receive(:find_using_perishable_token).with("validtoken").and_return(mock_user)
-          mock_user.should_receive(:save).and_return(true)
+          mock_user.should_receive(:update_attributes).and_return(true)
 
           put :update, :token => "validtoken", :user => { }
           should assign_to(:user, :with => mock_user)
@@ -150,14 +149,13 @@ describe PasswordResetsController do
 
         before(:each) do
           User.stub!(:find_using_perishable_token).with("validtoken").and_return(mock_user)
-          mock_user.stub!({ :validate_password= => true, :save => false})
-          mock_user.stub!(:password=)
-          mock_user.stub!(:password_confirmation=)
+          mock_user.stub!(:validate_password= => true)
+          mock_user.stub!(:update_attributes).and_return(false)
         end
 
         it "should not update password" do
           User.should_receive(:find_using_perishable_token).with("validtoken").and_return(mock_user)
-          mock_user.should_receive(:save).and_return(false)
+          mock_user.should_receive(:update_attributes).and_return(false)
 
           put :update, :token => "validtoken", :user => { }
         end
