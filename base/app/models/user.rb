@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   acts_as_authentic
 
+  attr_accessor :validate_password
+
   def recently_confirmed?
     @recent_confirmation
   end
@@ -13,6 +15,11 @@ class User < ActiveRecord::Base
   def confirm!
     self.update_attribute(:confirmed, true)
     @recent_confirmation = true
+  end
+
+  private
+  def require_password?
+    super || validate_password
   end
 
 end

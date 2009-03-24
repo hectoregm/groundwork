@@ -122,7 +122,7 @@ gem 'bmabey-email_spec', :lib => 'email_spec', :env => 'test', :source => "http:
 gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => "http://gems.github.com"
 gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
 gem 'haml'
-gem 'authlogic'
+gem 'authlogic', :version => ">= 2.0.1"
 
 ########## Dependecies Install ##########
 rake 'gems:install', :sudo => true
