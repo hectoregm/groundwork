@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 class UserMailer < ActionMailer::Base
-  default_url_options[:host] = 'www.example.com'
-
   def signup_notification(user)
     setup_email(user)
-    @subject += 'Please confirm your account'
+    @subject += 'Account Confirmation'
   end
 
   def activation(user)
@@ -14,7 +12,7 @@ class UserMailer < ActionMailer::Base
 
   def reset_password_instructions(user)
     setup_email(user)
-    @subject += 'You have asked to reset your password.'
+    @subject += 'Password Reset'
   end
 
   protected

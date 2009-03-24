@@ -2,18 +2,32 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User do
 
-  context "creation" do
+  before(:each) do
+    UserMailer.stub!(:deliver_signup_notification)
+  end
 
-    def build_user(attributes={})
-      user = User.make_unsaved(attributes)
-      user.save
-      user
-    end
+  def build_user(attributes={})
+    user = User.make_unsaved(attributes)
+    user.save
+    user
+  end
+
+  context "Valid input" do
 
     it "should be valid" do
       user = build_user
       user.should be_valid
     end
+
+    it "should send confirmation email" do
+      UserMailer.should_receive(:deliver_signup_notification)
+      user = build_user
+      user.should be_valid
+    end
+
+  end
+
+  context "Invalid input" do
 
     it "should require an email" do
       user = build_user(:email => nil)
@@ -37,10 +51,11 @@ describe User do
 
   end
 
-  context "requesting password reset" do
+  context "Requesting password reset" do
 
     before(:each) do
       @user = User.make
+      UserMailer.stub!(:deliver_reset_password_instructions)
     end
 
     it "should reset token" do
@@ -55,7 +70,7 @@ describe User do
 
   end
 
-  context "requesting confirmation" do
+  context "Requesting confirmation" do
 
     before(:each) do
       @user = User.make

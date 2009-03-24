@@ -138,7 +138,7 @@ generate :forgery
 spec 'spec.opts'
 spec 'spec_helper.rb'
 spec 'blueprints.rb'
-spec 'lib/spec_controller_helper.rb'
+spec 'spec_helpers/controller_spec_helper.rb'
 
 # Configuration cucumber
 root_config 'cucumber.yml'
@@ -162,7 +162,7 @@ initializer "action_mailer.rb", get_source("config/initializers/action_mailer.rb
 ########## Authlogic Setup ##########
 
 # Rspec helper for authlogic
-spec 'lib/spec_authlogic_helper.rb'
+spec 'spec_helpers/authentication_spec_helper.rb'
 
 generate :session, "user_session"
 
@@ -211,6 +211,7 @@ cp_r "features/password_reset", "features"
 
 # Get rspec tests
 spec 'models/user_spec.rb'
+spec 'models/user_mailer_spec.rb'
 spec 'controllers/users_controller_spec.rb'
 spec 'controllers/user_sessions_controller_spec.rb'
 spec 'controllers/password_resets_controller_spec.rb'

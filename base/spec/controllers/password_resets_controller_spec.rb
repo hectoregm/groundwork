@@ -1,5 +1,4 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper' )
-include SpecControllerHelper
 
 describe PasswordResetsController do
 
@@ -38,7 +37,7 @@ describe PasswordResetsController do
         should redirect_to(root_url)
       end
 
-      it do
+      it "should be successful" do
         post :create, :email => "mock@mail.com"
         should set_the_flash(:to => /Instructions to reset your password/)
       end
@@ -63,7 +62,7 @@ describe PasswordResetsController do
         should render_template(:new)
       end
 
-      it do
+      it "should not be successful" do
         post :create, :email => "mock@mail.com"
         should set_the_flash(:to => /No user was found/)
       end
@@ -103,7 +102,7 @@ describe PasswordResetsController do
         should redirect_to(root_url)
       end
 
-      it do
+      it "should not be successful "do
         get :edit, :token => "invalidtoken"
         should set_the_flash(:to => /sorry, but we could not locate your account/)
       end
@@ -140,7 +139,7 @@ describe PasswordResetsController do
           should redirect_to(account_url)
         end
 
-        it do
+        it "should be successful" do
           put :update, :token => "validtoken", :user => { }
           should set_the_flash(:to => /Password successfully updated/)
         end
@@ -168,7 +167,7 @@ describe PasswordResetsController do
           should render_template(:edit)
         end
 
-        it do
+        it "should not be successful" do
           put :update, :token => "validtoken", :user => { }
           should_not set_the_flash(:to => /Password successfully updated/)
         end

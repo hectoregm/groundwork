@@ -1,131 +1,112 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper' )
-include SpecControllerHelper
 
 describe UserSessionsController do
 
-  describe "new" do
+  describe "new:" do
 
     it_should_behave_like "an action that requires logged out user"
 
-    before(:each) do
-      @action = :new
-      mock_user_session
-    end
-
-    it "should initialize a new session" do
+    it "should create a new session" do
       UserSession.should_receive(:find).and_return(nil)
       UserSession.should_receive(:new).and_return(mock_user_session)
 
       get :new
-      should assign_to(:user_session)
+      should assign_to(:user_session, :with => mock_user_session)
+    end
+
+    it "should render login form" do
+      UserSession.stub!(:find).and_return(nil)
+      UserSession.stub!(:new).and_return(mock_user_session)
+
+      get :new
+      should render_template(:new)
     end
 
   end
 
-  describe "create" do
+  describe "create:" do
 
     it_should_behave_like "an action that requires logged out user"
 
-    before(:each) do
-      mock_user_session
-      @action = :create
-    end
+    context "Log in with valid credentials" do
 
-    describe "with valid credentials" do
+      before(:each) do
+        UserSession.stub!(:find => nil, :new => mock_user_session)
+        mock_user_session.stub!(:save).and_return(true)
+      end
 
       it "should create a session" do
-        valid_credentials
-
-        post :create, :user_session => {}
-      end
-
-      it do
-        valid_credentials
-
-        post :create, :user_session => {}
-        should set_the_flash(:to => "Login successful!")
-      end
-
-      it "should redirect to account page" do
-        valid_credentials
-
-        post :create, :user_session => {}
-        should redirect_to(account_url)
-      end
-
-      def valid_credentials
-        UserSession.should_receive(:find).and_return(nil)
-        UserSession.should_receive(:new).and_return(mock_user_session)
         mock_user_session.should_receive(:save).and_return(true)
-      end
-    end
-
-    describe "invalid credentials" do
-
-      it "should not create a session" do
-        invalid_credentials
 
         post :create, :user_session => {}
         should assign_to(:user_session, :with => mock_user_session)
       end
 
-      it do
-        invalid_credentials
-
+      it "should redirect to account page" do
         post :create, :user_session => {}
-        should render_template('new')
+        should redirect_to(account_url)
       end
 
-      it do
-        invalid_credentials
+      it "should be successful" do
+        post :create, :user_session => {}
+        should set_the_flash(:to => "Login successful!")
+      end
+
+    end
+
+    context "Log in with invalid credentials" do
+
+      before(:each) do
+        UserSession.stub!(:find => nil, :new => mock_user_session)
+        mock_user_session.stub!(:save).and_return(false)
+      end
+
+      it "should re-render login form" do
+        post :create, :user_session => {}
+        should render_template(:new)
+      end
+
+      it "should not be successful" do
+        mock_user_session.should_receive(:save).and_return(false)
 
         post :create, :user_session => {}
         should_not set_the_flash(:to => 'Login successful!')
-      end
-
-      def invalid_credentials
-        UserSession.should_receive(:find).and_return(nil)
-        UserSession.should_receive(:new).and_return(mock_user_session)
-        mock_user_session.should_receive(:save).and_return(false)
       end
 
     end
 
   end
 
-  describe "destroy" do
+  describe "destroy:" do
 
     it_should_behave_like "an action that requires logged in user"
 
-    before(:each) do
-      @action = :destroy
+    context do
+
+      before(:each) do
+        UserSession.stub!(:find).and_return(mock_user_session)
+        mock_user_session.stub!(:user).and_return(mock_user)
+        mock_user_session.stub!(:destroy)
+      end
+
+      it "should destroy the session" do
+        mock_user_session.should_receive(:destroy)
+
+        post :destroy
+      end
+
+      it "should redirect to login page" do
+        post :destroy
+        should redirect_to(login_url)
+      end
+
+      it "should be successful" do
+        post :destroy
+        should set_the_flash(:to => 'Logout successful!')
+      end
+
     end
 
-    it "should destroy the session" do
-      common_behavior
-
-      post :destroy
-    end
-
-    it do
-      common_behavior
-
-      post :destroy
-      should set_the_flash(:to => 'Logout successful!')
-    end
-
-    it "should redirect to login page" do
-      common_behavior
-
-      post :destroy
-      should redirect_to(login_url)
-    end
-
-    def common_behavior
-      UserSession.should_receive(:find).and_return(mock_user_session)
-      mock_user_session.should_receive(:user).and_return(mock_user)
-      mock_user_session.should_receive(:destroy)
-    end
   end
 
 end
