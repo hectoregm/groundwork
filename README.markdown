@@ -89,7 +89,8 @@ $ rails <name app> -m rails-template/base.rb
 * [machinist](http://github.com/notahat/machinist/tree/master)
 * [authlogic](http://github.com/binarylogic/authlogic/tree/master)
 * [haml](http://github.com/nex3/haml/tree/master)
-
+* [web-app-theme](http://github.com/pilu/web-app-theme/tree/master)
+* [rdiscount](http://github.com/rtomayko/rdiscount/tree/master)
 
 Rails Application Template Library
 ==================================
