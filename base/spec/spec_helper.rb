@@ -7,7 +7,7 @@ require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/authentication_
 require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/controller_spec_helper")
 require 'spec/autorun'
 require 'spec/rails'
-require 'authlogic/testing/test_unit_helpers'
+require 'authlogic/test_case'
 require 'email_spec/helpers'
 require 'email_spec/matchers'
 

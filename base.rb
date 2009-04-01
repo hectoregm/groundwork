@@ -128,7 +128,7 @@ gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => "http://g
 gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
 gem 'haml'
 gem 'rdiscount'
-gem 'authlogic', :version => ">= 2.0.1"
+gem 'authlogic', :version => "= 2.0.5"
 
 ########## Dependecies Install ##########
 rake 'gems:install', :sudo => true

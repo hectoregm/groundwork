@@ -41,7 +41,7 @@ describe User do
 
     it "should require password" do
       user = build_user(:password => nil)
-      user.should have(1).error_on(:password)
+      user.should have(2).error_on(:password)
     end
 
     it "should require password confirmation" do
