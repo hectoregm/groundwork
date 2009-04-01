@@ -72,6 +72,11 @@ def controller(filename)
   file("app/controllers/#{filename}", get_source("app/controllers/#{filename}"), false)
 end
 
+def helper(filename)
+  log 'helper', filename
+  file("app/helpers/#{filename}", get_source("app/helpers/#{filename}"), false)
+end
+
 def view(controller, filename)
   log 'view', "#{filename} for #{controller}"
   file("app/views/#{controller}/#{filename}", get_source("app/views/#{controller}/#{filename}"), false)
@@ -188,21 +193,30 @@ controller "application_controller.rb"
 controller "user_sessions_controller.rb"
 controller "users_controller.rb"
 controller "password_resets_controller.rb"
+controller 'home_controller.rb'
 
 # Get views
 view "users", "new.html.haml"
 view "users", "edit.html.haml"
 view "users", "_form.html.haml"
 view "users", "show.html.haml"
-view "user_sessions", "new.html.erb"
+view "user_sessions", "new.html.haml"
 view "user_mailer", "activation.text.html.haml"
 view "user_mailer", "reset_password_instructions.text.html.haml"
 view "user_mailer", "signup_notification.text.html.haml"
 view "password_resets", "new.html.haml"
 view "password_resets", "edit.html.haml"
+view 'home', 'index.html.haml'
+
+#Get helpers
+helper 'layout_helper.rb'
 
 # Modify layouts
 layout "application.html.haml"
+layout 'single_column.html.haml'
+
+# Get stylesheets
+cp_r "public/stylesheets/sass", "public/stylesheets"
 
 # Get authentication related cucumber features
 cp_r "features/registration", "features"

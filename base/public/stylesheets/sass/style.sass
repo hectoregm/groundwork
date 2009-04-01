@@ -1,0 +1,281 @@
+@import colors
+@import behaviors
+
+body
+  :color = !black_font
+  :background = !gray_lightest
+  :font-family lucinda, sans-serif
+
+  .small
+    :font-size = !small
+
+  .gray
+    :color = !gray
+
+  .hightlight
+    :background-color = !yellow_light
+
+  a
+    :-moz-outline none
+
+    &:link, &:visited, &:hover, &:active
+      :color = !red_wine
+
+  hr
+    :background = !gray_lightest
+    :color = !gray_lightest
+
+  h1, h2, h3
+    :color = !red_wine
+
+  #container
+
+    #header
+      :background = !red_wine
+
+      h1
+        :padding 20px 0
+
+        a
+          &:link, &:active, &:hover, &:visited
+            :color = !white
+
+      #main-navigation
+        :background = !black_darker
+        +round-top
+
+        ul
+
+          li
+            :background = !black_darker
+            :padding-left 15px
+            :margin-right 0
+            +round-top
+
+            &.active
+              :padding 0
+              :margin-left 15px
+              :background = !gray_lightest
+
+              a
+                :padding 8px 15px
+
+                &:link, &:visited, &:hover, &:active
+                  :color = !black_darker
+
+          a
+            :padding 8px 0
+
+            &:link, &:visited, &:hover, &:active
+              :text-decoration none
+              :color = !white
+
+      #user-navigation
+        :top auto
+        :bottom 5px
+        :right 25px
+
+        ul li a
+          &:link, &:visited, &:hover, &:active
+            :text-decoration none
+            :color = !white
+
+    #main
+      +round-top
+
+      .block
+        +round-top
+        +round-bottom
+
+        .flash
+
+          .message
+            :-moz-border-radius 3px
+            :-webkit-border-radius 3px
+            :text-align center
+            :margin 0 auto 15px
+
+            p
+              :margin 8px
+
+          .error
+            :border 1px solid #fbb
+            :background-color #fdd
+
+          .warning
+            :border 1px solid #fffaaa
+            :background-color #ffffcc
+
+          .notice
+            :border 1px solid #1FDF00
+            :background-color #BBFFB6
+
+        .content
+          :background = !white
+          :padding-top 1px
+
+          h2
+            :margin-left 15px
+
+        .secondary-navigation
+          :background = !red_wine
+          :border-bottom-color = !black_darker
+          +round-top
+
+          ul li
+            a
+              &:link, &:visited, &:hover, &:active
+                :text-decoration none
+                :color = !white
+
+            &.active
+              :background-color = !black_darker
+
+              a:hover
+                :background-color = !black_darker
+
+            &.first
+              +round-top
+
+          li
+            a:hover
+              :background = !red_wine_dark
+
+            &.first a
+              :-moz-border-radius-topleft 4px
+              :-webkit-border-top-left-radius 4px
+
+      #footer .block
+        :color = !white
+        :background = !black_darker
+        +round-top
+        +round-bottom
+
+        p
+          :margin 0
+          :padding 10px
+
+    #sidebar
+      +round-bottom
+
+      .block
+        :background = !white
+        +round-top
+        +round-bottom
+
+      h3
+        :background = !red_wine
+        :color = !white
+        :border-bottom = 10px solid !black_darker
+        +round-top
+
+      ul
+
+        li a
+          &:link, &:visited
+            :background = !white
+            :border-bottom = 1px solid !gray_lightest
+            :text-decoration none
+
+          &:hover, &:active
+            :background = !red_wine_dark
+            :color = !white
+
+        &.navigation
+          +round-bottom
+
+    #box
+
+      :margin 25px auto 0
+
+      .block
+        :background = !white
+        :margin 25px auto 0
+        +round-top
+        +round-bottom
+
+      h2
+        :background #7A1818
+        :color = !white
+        +round-top
+
+    #box-flash .block
+      :background = !white
+      :margin 25px auto 0
+      :width 500px
+      +round-top
+      +round-bottom
+
+  .form
+
+    input
+
+      &.text_field
+        :width 100%
+        +black-border
+
+      &.button
+        :background = !gray_ultralight
+        :color = !black_darker
+        :padding 2px 5px
+        :cursor pointer
+        +black-border
+        +round-top
+        +round-bottom
+
+    textarea.text_area
+      :width 100%
+      +black-border
+
+    .description
+      :font-style italic
+      :color #8C8C8C
+      :font-size .9em
+
+  .table
+
+    th
+      :background = !black_darker
+      :color = !white
+
+      &.first
+        +round-top
+
+      &.last
+        :-moz-border-radius-topright 4px
+        :-webkit-border-top-right-radius 4px
+
+    td
+      :border-bottom = 1px solid !gray_lightest
+
+  .pagination
+    span.current
+      :background = !black_darker
+      :color = !white
+      :border-color = !black_darker
+
+    a
+      :color = !black_darker
+      :border-color = !black_darker
+
+      &:hover
+        :color = !white
+        :background = !black_darker
+
+  ul
+    :margin-left 30px
+
+  ul.list li
+    :border-bottom-color = !gray_lightest
+    :border-bottom-width 1px
+    :border-bottom-style solid
+    +round-top
+    +round-bottom
+
+    .item .avatar
+      :border-color = !gray_lightest
+      :border-width 1px
+      :border-style solid
+      :padding 2px
+
+

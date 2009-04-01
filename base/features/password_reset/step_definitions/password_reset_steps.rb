@@ -17,7 +17,7 @@ end
 Then /^I (?:should )?see a password modification form$/ do
   response.should contain('Change Password')
   response.should contain('Password')
-  response.should contain('Password confirmation')
+  response.should contain('Confirmation')
 end
 
 Then /^I should not see a change password form$/ do

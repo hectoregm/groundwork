@@ -40,7 +40,7 @@ Feature: Password Reset
     And I follow "reset" in the email
     And I see a password modification form
     And I fill in "password" with "newsecret"
-    And I fill in "password confirmation" with "newsecret"
+    And I fill in "confirmation" with "newsecret"
     When I press "Update Password"
     Then I should see my account page
     And I should see "Password successfully updated"
@@ -50,7 +50,7 @@ Feature: Password Reset
     And I follow "reset" in the email
     And I see a password modification form
     And I fill in "password" with "<password>"
-    And I fill in "password confirmation" with "<password_confirmation>"
+    And I fill in "confirmation" with "<password_confirmation>"
     When I press "Update Password"
     Then I should not see my account page
     And I should not see "Password successfully updated"

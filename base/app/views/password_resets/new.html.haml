@@ -1,10 +1,17 @@
-%h1 Forgot Password
-Fill out the form below, instructions will be sent to your email.
+- title 'Forgot Password'
 
-- form_tag password_reset_path do
-  = label_tag :email
-  %br
-  = text_field_tag :email
-  %br
-  %br
-  = submit_tag "Reset Password"
+#block-reset.block
+  %h2= yield :title
+  .content.form
+    %p Fill out the form below, instructions will be sent to your email.
+    - form_tag password_reset_path do
+      .group
+        .left
+          = label_tag :email, nil, :class => 'label'
+        .right
+          = text_field_tag :email, nil, :class => 'text_field'
+        .clear
+      .group
+        .right
+          = submit_tag "Reset Password", :class => 'button'
+        .clear

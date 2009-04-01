@@ -1,6 +1,12 @@
-%h1
-  Register
-- form_for @user, :url => account_path do |f|
-  = f.error_messages
-  = render :partial => "form", :object => f
-  = f.submit "Register"
+- title 'Register'
+
+#block-signup.block
+  %h2= yield :title
+  .content.form
+    - form_for @user, :url => account_path do |f|
+      = f.error_messages
+      = render :partial => "form", :object => f
+      .group
+        .left
+          = f.submit "Register", :class => 'button'
+        .clear

@@ -1,0 +1,28 @@
+- title 'Login'
+
+#block-login.block
+  %h2= yield :title
+  .content.form
+    - form_for @user_session, :url => user_session_path do |f|
+      = f.error_messages
+      .group
+        .left
+          = f.label(:login, nil, :class => 'label')
+        .right
+          = f.text_field :login, :class => 'text_field'
+        .clear
+      .group
+        .left
+          = f.label :password, nil, :class => 'label'
+        .right
+          = f.password_field :password, :class => 'text_field'
+        .clear
+      .group
+        = f.check_box :remember_me
+        = f.label :remember_me
+      .group
+        .left{:style => 'padding: 7px; font-size: 10px;'}
+          = link_to 'Lost password?', new_password_reset_path
+        .right
+          = f.submit "Login", :class => 'button'
+        .clear

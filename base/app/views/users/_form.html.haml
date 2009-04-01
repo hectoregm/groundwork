@@ -1,20 +1,12 @@
-= form.label :login
-%br
-= form.text_field :login
-%br
-%br
-= form.label :email
-%br
-= form.text_field :email
-%br
-%br
-= form.label :password, form.object.new_record? ? nil : "Change password"
-%br
-= form.password_field :password
-%br
-%br
-= form.label :password_confirmation
-%br
-= form.password_field :password_confirmation
-%br
-%br
+.group
+  = form.label :login, nil, :class => 'label'
+  = form.text_field :login, :class => 'text_field'
+.group
+  = form.label :email, nil, :class => 'label'
+  = form.text_field :email, :class => 'text_field'
+.group
+  = form.label :password, form.object.new_record? ? nil : "Change password", :class => 'label'
+  = form.password_field :password, :class => 'text_field'
+.group
+  = form.label :password_confirmation, nil, :class => 'label'
+  = form.password_field :password_confirmation, :class => 'text_field'

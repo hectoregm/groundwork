@@ -240,7 +240,7 @@ describe UsersController do
         UserSession.should_not_receive(:create)
 
         get :confirm, :token => {}
-        should_not set_the_flash(:to => /Account confirmed!/)
+        should set_the_flash(:to => /Account couldn't be confirmed/)
       end
 
     end

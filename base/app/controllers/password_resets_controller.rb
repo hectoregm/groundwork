@@ -1,4 +1,6 @@
 class PasswordResetsController < ApplicationController
+  layout 'single_column'
+
   before_filter :require_no_user
   before_filter :load_user_with_token, :only => [:edit, :update]
 
@@ -14,7 +16,7 @@ class PasswordResetsController < ApplicationController
 
       redirect_to root_url
     else
-      flash[:notice] = "No user was found with that email address"
+      flash.now[:error] = "No user was found with that email address"
       render :action => :new
     end
   end
@@ -36,7 +38,7 @@ class PasswordResetsController < ApplicationController
   def load_user_with_token
     @user = User.find_using_perishable_token(params[:token])
     unless @user
-      flash[:notice] = "We're sorry, but we could not locate your account. " +
+      flash[:error] = "We're sorry, but we could not locate your account. " +
         "If you are having issues try copying and pasting the URL " +
         "from your email into your browser or restarting the " +
         "reset password process."

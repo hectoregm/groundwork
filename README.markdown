@@ -67,13 +67,13 @@ $ rails <name app> -m rails-template/base.rb
 
 * Authentication: Using authlogic gem.
   * Email activation.
-  * Password reset
+  * Password reset.
 * Configuration of a BDD environmnent.
-* Test Coverage: 100%
+* Test Coverage: >= 95%.
+* Basic Layout (Based in pilu/web-app-theme).
 
 ## TODO
 * Internationalization
-* Basic Layout
 * Authorization
 * Basic Administration
 

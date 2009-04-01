@@ -64,7 +64,7 @@ describe PasswordResetsController do
 
       it "should not be successful" do
         post :create, :email => "mock@mail.com"
-        should set_the_flash(:to => /No user was found/)
+        should render_template(:new)
       end
 
     end

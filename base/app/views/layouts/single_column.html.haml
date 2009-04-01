@@ -26,22 +26,11 @@
               %li= link_to 'Login', login_path
               %li= link_to 'Register', new_user_path
           .clear
-      #wrapper
-        #main
+      #main
+        #box-flash
           .block
             .flash
               - flash.each do |name, mesg|
                 %div{ :class => "message #{name}" }
                   %p&= mesg
-            .content
-              = yield
-          #footer
-            .block
-              %p== Copyright &copy; 2009 Your Site.
-        #sidebar
-          .block
-            %h3 Simple Block
-            .content
-              %p
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        .clear
+        #box= yield

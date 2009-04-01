@@ -4,6 +4,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+
+    render :action => :new, :layout => 'single_column'
   end
 
   def create
@@ -12,7 +14,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Registration completed!"
       redirect_to root_url
     else
-      render :action => :new
+      render :action => :new, :layout => 'single_column'
     end
   end
 
@@ -44,6 +46,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Account confirmed!"
       redirect_to account_url
     else
+      flash[:error] = "Account couldn't be confirmed, invalid confirmation token"
       redirect_to root_url
     end
   end
