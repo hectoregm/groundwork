@@ -15,3 +15,4 @@ log/*.pid
 tmp/**/*
 tmp/*.html
 vendor/rails
+public/stylesheets/*.css
