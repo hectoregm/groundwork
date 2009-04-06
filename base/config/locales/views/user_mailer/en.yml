@@ -1,0 +1,20 @@
+en:
+  user_mailer:
+    signup_notification:
+      title: 'Welcome to APP'
+      login_credentials: 'Your login credentials are:'
+      body: 'A new account was requested from this email address.
+       If this is correct, please go to this web address'
+    activation:
+      thanks: 'Thanks for using our service.'
+      body: '{{user}}, your account is ready to be used. Please visit our site: 
+        {{link}}'
+    reset_password_instructions:
+      body: 'A request to reset your password has been made.
+        <br />
+        If you did not make this request, simply ignore this email.
+        <br />
+        If you did make this request just click the link below:'
+      help: 'If the above URL does not work try copying and pasting it into your browser.
+       <br />
+       If you continue to have problem please feel free to contact us.'

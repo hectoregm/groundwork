@@ -71,9 +71,9 @@ $ rails <name app> -m rails-template/base.rb
 * Configuration of a BDD environmnent.
 * Test Coverage: >= 95%.
 * Basic Layout (Based in pilu/web-app-theme).
+* Internationalization. (:es being the only translated language)
 
 ## TODO
-* Internationalization
 * Authorization
 * Basic Administration
 

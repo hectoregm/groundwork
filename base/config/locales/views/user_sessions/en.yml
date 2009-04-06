@@ -1,0 +1,8 @@
+en:
+  login_successful: 'Login successful!'
+  logout_successful: 'Logout successful!'
+  user_sessions:
+    new:
+      title: 'Login'
+      lost_password: 'Lost password?'
+      submit: 'Login'

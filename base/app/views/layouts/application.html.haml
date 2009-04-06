@@ -1,5 +1,5 @@
 !!! Strict
-%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+%html{locale_attrs}
   %head
     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
     %title&= yield(:title) || "APP"
@@ -14,17 +14,15 @@
         - if current_user
           #user-navigation
             %ul
-              %li= link_to 'Profile', account_path
-              %li
-                %a{ :href => "#" } Settings
-              %li= link_to 'Logout', logout_path
+              %li= link_to t(:profile), account_path
+              %li= link_to t(:logout), logout_path
             .clear
         #main-navigation
           %ul
-            %li.active= link_to 'Home', root_path
+            %li.active= link_to t(:home), root_path
             - if !current_user
-              %li= link_to 'Login', login_path
-              %li= link_to 'Register', new_user_path
+              %li= link_to t(:login), login_path
+              %li= link_to t(:register), new_account_path
           .clear
       #wrapper
         #main
@@ -37,11 +35,10 @@
               = yield
           #footer
             .block
-              %p== Copyright &copy; 2009 Your Site.
+              %p= t(:copyright)
         #sidebar
           .block
-            %h3 Simple Block
+            %h3= yield :title_sidebar
             .content
-              %p
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              %p= yield :sidebar
         .clear

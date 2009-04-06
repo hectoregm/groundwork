@@ -16,7 +16,7 @@ Feature: Registration
     And I fill in "login" with "hector"
     And I fill in "email" with "hector@mail.com"
     And I fill in "password" with "secret"
-    And I fill in "password confirmation" with "secret"
+    And I fill in "confirmation" with "secret"
     And I press "Register"
     Then I should have a successful registration
 
@@ -26,7 +26,7 @@ Feature: Registration
     And I fill in "login" with "<login>"
     And I fill in "email" with "<email>"
     And I fill in "password" with "<password>"
-    And I fill in "password confirmation" with "<password_confirmation>"
+    And I fill in "confirmation" with "<password_confirmation>"
     And I press "Register"
     Then I should have an unsuccessful registration
  
@@ -37,7 +37,7 @@ Feature: Registration
     | hector | hector@mail.com |          |                       |
     | hector | hector@mail.com |  secret  |                       |
 
-  Examples: Bad password and password confirmation combinations
+  Examples: Bad password and confirmation combinations
     | login  |      email      | password | password_confirmation |
     | hector | hector@mail.com |          |                       |
     | hector | hector@mail.com |  secret  |                       |

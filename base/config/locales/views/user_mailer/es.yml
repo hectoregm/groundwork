@@ -1,0 +1,20 @@
+es:
+  user_mailer:
+    signup_notification:
+      title: 'Bienvenido a APP'
+      login_credentials: 'Sus credenciales de acceso son:'
+      body: 'Una nueva cuenta se pidió a esta dirección de correo electrónico.
+       Si esto es correcto, por favor vaya a esta dirección web:'
+    activation:
+      thanks: 'Gracias por utilizar nuestro servicio.'
+      body: '{{user}}, su cuenta está lista para ser utilizada. Por favor, visite nuestro sitio: 
+        {{link}}'
+    reset_password_instructions:
+      body: 'Una solicitud para restablecer su contraseña se ha hecho.
+         <br />
+         Si no hizo esta solicitud, simplemente ignore este mensaje.
+         <br />
+         Si usted la solicito haga clic en el enlace de abajo:'
+      help: 'Si la liga no funciona intente copiar y pegar en su navegador.
+        <br />
+        Si sigues teniendo problemas, por favor no dude en ponerse en contacto con nosotros.'

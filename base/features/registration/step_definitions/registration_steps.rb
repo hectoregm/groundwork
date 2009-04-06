@@ -7,7 +7,7 @@ Given /^"(.*)" an unconfirmed user$/ do |name|
   And "I fill in \"login\" with \"#{name}\""
   And "I fill in \"email\" with \"#{name}@mail.com\""
   And "I fill in \"password\" with \"secret\""
-  And "I fill in \"password confirmation\" with \"secret\""
+  And "I fill in \"confirmation\" with \"secret\""
   When "I press \"Register\""
   Then "I should have a successful registration"
 end
@@ -17,7 +17,7 @@ Given /^"(.*)" an unconfirmed user with password "(.*)"$/ do |name, password|
   And "I fill in \"login\" with \"#{name}\""
   And "I fill in \"email\" with \"#{name}@mail.com\""
   And "I fill in \"password\" with \"#{password}\""
-  And "I fill in \"password confirmation\" with \"#{password}\""
+  And "I fill in \"confirmation\" with \"#{password}\""
   When "I press \"Register\""
   Then "I should have a successful registration"
 end
@@ -47,7 +47,7 @@ Then /^I should see the registration form$/ do
   response.should contain('Login')
   response.should contain('Email')
   response.should contain('Password')
-  response.should contain('Password confirmation')
+  response.should contain('Confirmation')
 end
 
 Then /^I should have a successful registration$/ do

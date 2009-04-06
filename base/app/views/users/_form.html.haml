@@ -1,12 +1,13 @@
+- model_t = lambda { |attr| User.human_attribute_name(attr) }
 .group
-  = form.label :login, nil, :class => 'label'
+  = form.label :login, model_t['login'], :class => 'label'
   = form.text_field :login, :class => 'text_field'
 .group
-  = form.label :email, nil, :class => 'label'
+  = form.label :email, model_t['email'], :class => 'label'
   = form.text_field :email, :class => 'text_field'
 .group
-  = form.label :password, form.object.new_record? ? nil : "Change password", :class => 'label'
+  = form.label :password, form.object.new_record? ? model_t['password']: t(:change_password), :class => 'label'
   = form.password_field :password, :class => 'text_field'
 .group
-  = form.label :password_confirmation, nil, :class => 'label'
+  = form.label :password_confirmation, model_t['password_confirmation'], :class => 'label'
   = form.password_field :password_confirmation, :class => 'text_field'

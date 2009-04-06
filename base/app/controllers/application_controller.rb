@@ -1,10 +1,17 @@
 class ApplicationController < ActionController::Base
   helper :all
+  helper_method :current_user_session, :current_user, :default_url_options
+
   protect_from_forgery
   filter_parameter_logging :password, :password_confirmation
-  helper_method :current_user_session, :current_user
+
+  before_filter :set_locale
 
   private
+  def default_url_options(options={})
+    { :locale => I18n.locale }
+  end
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -19,7 +26,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       # No redirect if requested page is /logout
       store_location if !(request.request_uri =~ /\/logout$/)
-      flash[:error] = "You must be logged in to access this page"
+      flash[:error] = t :require_user
       redirect_to new_user_session_url
       return false
     end
@@ -28,7 +35,7 @@ class ApplicationController < ActionController::Base
   def require_no_user
     if current_user
       store_location
-      flash[:error] = "You must be logged out to access this page"
+      flash[:error] = t :require_no_user
       redirect_to account_url
       return false
     end
@@ -41,5 +48,9 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+
+  def set_locale
+    I18n.locale = params[:locale]
   end
 end

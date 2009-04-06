@@ -1,12 +1,12 @@
-- title 'Register'
+- title t('.title')
 
-#block-signup.block
+#account-new.block
   %h2= yield :title
   .content.form
     - form_for @user, :url => account_path do |f|
       = f.error_messages
-      = render :partial => "form", :object => f
+      = render :partial => f
       .group
         .left
-          = f.submit "Register", :class => 'button'
+          = f.submit t :register, :class => 'button'
         .clear

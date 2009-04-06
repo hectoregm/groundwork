@@ -1,35 +1,19 @@
-- title 'My Account'
-
-#block-text.block
+- title t('.title')
+- model_t = lambda { |attr| User.human_attribute_name(attr) }
+#account-show.block
   .content
     %h2= yield :title
   .inner
     %p
-      %b
-        Login:
-      = h @user.login
+      %b= model_t['login']
+      &= @user.login
     %p
-      %b
-        Login count:
-      = h @user.login_count
+      %b= model_t['last_login_at']
+      &= @user.last_login_at
     %p
-      %b
-        Last request at:
-      = h @user.last_request_at
+      %b= model_t['last_login_ip']
+      &= @user.last_login_ip
     %p
-      %b
-        Last login at:
-      = h @user.last_login_at
-    %p
-      %b
-        Current login at:
-      = h @user.current_login_at
-    %p
-      %b
-        Last login ip:
-      = h @user.last_login_ip
-    %p
-      %b
-        Current login ip:
-      = h @user.current_login_ip
-    = link_to 'Edit', edit_account_path
+      %b= model_t['current_login_ip']
+      &= @user.current_login_ip
+    = link_to t('.edit'), edit_account_path

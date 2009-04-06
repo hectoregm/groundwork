@@ -1,0 +1,9 @@
+en:
+  require_user: 'You must be logged in to access this page'
+  require_no_user: 'You must be logged out to access this page'
+  profile: 'Profile'
+  logout: 'Logout'
+  home: 'Home'
+  login: 'Login'
+  register: 'Register'
+  copyright: 'Copyright &copy; 2009 Your site.'

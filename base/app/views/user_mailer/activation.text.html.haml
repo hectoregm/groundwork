@@ -2,9 +2,5 @@
 %html
   %head
   %body
-    %p
-      Thanks for using our service.
-    %p
-      = @user.login + ", your account is ready to be used. Please visit our site: "
-      %a{ :href => root_url }
-        = root_url
+    %p= t('user_mailer.activation.thanks')
+    %p= t('user_mailer.activation.body', :user => @user.login, :link => root_url, :locale => I18n.locale)

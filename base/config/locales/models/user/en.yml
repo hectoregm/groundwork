@@ -1,0 +1,14 @@
+en:
+  activerecord:
+    models: 
+      user: 'Account'
+    attributes: 
+      user: 
+        login: 'Login'
+        email: 'Email'
+        password: 'Password'
+        password_confirmation: 'Confirmation'
+        last_login_at: 'Last login at'
+        current_login_at: 'Current login at'
+        last_login_ip: 'Last login from'
+        current_login_ip: 'Login from'

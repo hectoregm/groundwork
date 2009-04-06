@@ -1,0 +1,27 @@
+es:
+  activerecord:
+    models:
+      user_session: 'sesión'
+      user session: 'sesión'
+  authlogic:
+    error_messages:
+      login_blank: 'no puede ser vació'
+      login_not_found: 'no existe'
+      login_invalid: 'solo puede contener letras, números, espacios y ,-_@'
+      consecutive_failed_logins_limit_exceeded: 'El numero de ingresos fallidos ha sido excedido, su cuenta a sido deshabilitada'
+      email_invalid: 'debe ser una dirección de correo electrónico valido'
+      password_blank: 'no puede ser vacía'
+      password_invalid: 'no es valida'
+      not_active: 'Su cuenta no esta activa'
+      not_confirmed: 'Su cuenta no esta confirmada, revise su correo'
+      not_approved: 'Su cuenta no ha sido aprobada'
+      no_authentication_details: 'No dio las credenciales necesarias para su autenticación'
+    models:
+      user_session: 'Sesión'
+    attributes:
+      user_session: 
+        login: 'Usuario'
+        email: 'Correo'
+        password: 'Contraseña'
+        password_confirmation: 'Confirmación'
+        remember_me: 'Recuerdame'

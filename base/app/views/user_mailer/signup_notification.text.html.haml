@@ -2,16 +2,12 @@
 %html
   %head
   %body
-    %p Welcome to APP
+    %h2= t('user_mailer.signup_notification.title')
+    %p= t('user_mailer.signup_notification.body')
+    %p= confirm_account_url(:token => @user.perishable_token, :locale => I18n.locale)
+    %p= t('user_mailer.signup_notification.login_credentials')
     %p
-      A new account was requested from this email address.
+      = User.human_attribute_name('login')+ ": " + @user.login
       %br
-      If this is correct, please go to this web address:
-    %p
-      = confirm_account_url(:token => @user.perishable_token)
-    %p Your login credentials are:
-    %p
-      = "Login: " + @user.login
-      %br
-      = "Password: " + @user.password
+      = User.human_attribute_name('password') + ": " + @user.password
 

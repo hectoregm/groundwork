@@ -95,7 +95,7 @@ end
 end
 
 # Delete unnecessary files.
-%w[doc/README_FOR_APP public/index.html public/favicon.ico public/robots.txt].each do |file|
+%w[doc/README_FOR_APP public/index.html public/favicon.ico public/robots.txt config/locales/en.yml].each do |file|
   rm file
 end
 
@@ -165,6 +165,12 @@ run("haml --rails .")
 # Initializer for action_mailer configuration
 initializer "action_mailer.rb", get_source("config/initializers/action_mailer.rb")
 
+# Set I18n load path
+environment(%q|config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]|)
+
+# Add ruby-debug to development environment
+environment("require 'ruby-debug'", :env => 'development')
+
 ########## Authlogic Setup ##########
 
 # Rspec helper for authlogic
@@ -187,7 +193,7 @@ model "user_mailer.rb"
 model "user_observer.rb"
 
 # Add observer
-gsub_file('config/environment.rb', /#\s*(config.active_record.observers =) :cacher, :garbage_collector, :forum_observer/, '\1 :user_observer')
+environment('config.active_record.observers = :user_observer')
 
 # Get controllers
 controller "application_controller.rb"
@@ -208,6 +214,7 @@ view "user_mailer", "signup_notification.text.html.haml"
 view "password_resets", "new.html.haml"
 view "password_resets", "edit.html.haml"
 view 'home', 'index.html.haml'
+view 'home', 'index.es.html.haml'
 
 #Get helpers
 helper 'layout_helper.rb'
@@ -230,6 +237,10 @@ spec 'models/user_mailer_spec.rb'
 spec 'controllers/users_controller_spec.rb'
 spec 'controllers/user_sessions_controller_spec.rb'
 spec 'controllers/password_resets_controller_spec.rb'
+spec 'helpers/layout_helper_spec.rb'
+
+# Get i18n files
+cp_r 'config/locales', 'config'
 
 # Send initial commit
 git :add => "."

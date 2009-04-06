@@ -1,0 +1,13 @@
+es:
+  reset_successful: 'Instrucciones para restablecer su contraseña ha sido enviada a su correo electrónico. Por favor, revise su correo.'
+  reset_unsuccessful: 'Ningún usuario se encontró con la dirección de correo electrónico proporcionada.'
+  password_update_successful: 'La contraseña ha sido actualizada'
+  invalid_reset_token: 'Lo sentimos, pero no hemos podido localizar su cuenta. Si tiene problemas intente copiar y pegar la URL del correo electrónico al navegador o reiniciando el proceso de restablecimiento de contraseña.'
+  password_resets:
+    new:
+      title: '¿Olvidaste tu contraseña?'
+      instructions: 'Llene el siguiente formulario, las instrucciones serán enviadas a su correo electrónico.'
+      submit: 'Restablecer la contraseña'
+    edit:
+      title: 'Cambiar Contraseña'
+      submit: 'Actualizar contraseña'

@@ -1,0 +1,6 @@
+en:
+  user_mailer:
+    signup_subject: 'Account Confirmation'
+    activation_subject: 'Welcome'
+    reset_password_subject: 'Password Reset'
+    from: 'Notifications {{email}}'

@@ -1,0 +1,16 @@
+es:
+  register_successful: 'Registro completado'
+  change_password: 'Cambiar Contraseña'
+  account_updated: 'Cuenta actualizada'
+  confirm_successful: 'Cuenta confirmada'
+  confirm_unsuccessful: 'Cuenta no pudo ser confirmada, token invalido'
+  users:
+    new:
+      title: 'Registro'
+    show:
+      title: 'Mi Cuenta'
+      edit: 'Modificar'
+    edit:
+      title: 'Modificando Mi Cuenta'
+      submit: 'Actualizar'
+      profile: 'Regresar a Mi Cuenta'

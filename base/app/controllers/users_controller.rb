@@ -5,16 +5,18 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
-    render :action => :new, :layout => 'single_column'
+    render :new, :layout => 'single_column'
   end
 
   def create
+
+
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "Registration completed!"
+      flash[:notice] = t :register_successful
       redirect_to root_url
     else
-      render :action => :new, :layout => 'single_column'
+      render :new, :layout => 'single_column'
     end
   end
 
@@ -29,10 +31,10 @@ class UsersController < ApplicationController
   def update
     @user = @current_user
     if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
+      flash[:notice] = t :account_updated
       redirect_to account_url
     else
-      render :action => :edit
+      render :edit
     end
   end
 
@@ -43,10 +45,10 @@ class UsersController < ApplicationController
       @user.confirm!
       UserSession.create(@user)
 
-      flash[:notice] = "Account confirmed!"
+      flash[:notice] = t :confirm_successful
       redirect_to account_url
     else
-      flash[:error] = "Account couldn't be confirmed, invalid confirmation token"
+      flash[:error] = t :confirm_unsuccessful
       redirect_to root_url
     end
   end

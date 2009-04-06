@@ -1,0 +1,16 @@
+en:
+  register_successful: 'Registration completed!'
+  change_password: 'Change Password'
+  account_updated: 'Account updated!'
+  confirm_successful: 'Account confirmed!'
+  confirm_unsuccessful: Account couldn't be confirmed, invalid confirmation token
+  users:
+    new:
+      title: 'Register'
+    show:
+      title: 'My Account'
+      edit: 'Edit'
+    edit:
+      title: 'Edit My Account'
+      submit: 'Update'
+      profile: 'My Account'

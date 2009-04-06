@@ -1,0 +1,9 @@
+es:
+  require_user: 'Debes ingresar al sitio para acceder a esta pagina'
+  require_no_user: 'Debes estar desconectado del sitio para acceder a esta pagina'
+  profile: 'Perfil'
+  logout: 'Salir'
+  home: 'Principal'
+  login: 'Ingreso'
+  register: 'Registro'
+  copyright: 'Derechos Reservados &copy; 2009 Tu sitio.'

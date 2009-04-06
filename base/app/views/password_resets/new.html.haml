@@ -1,17 +1,17 @@
-- title 'Forgot Password'
+- title t('.title')
 
-#block-reset.block
+#password_resets-new.block
   %h2= yield :title
   .content.form
-    %p Fill out the form below, instructions will be sent to your email.
+    %p= t('.instructions')
     - form_tag password_reset_path do
       .group
         .left
-          = label_tag :email, nil, :class => 'label'
+          = label_tag :email, User.human_attribute_name('email'), :class => 'label'
         .right
           = text_field_tag :email, nil, :class => 'text_field'
         .clear
       .group
         .right
-          = submit_tag "Reset Password", :class => 'button'
+          = submit_tag t('.submit'), :class => 'button'
         .clear

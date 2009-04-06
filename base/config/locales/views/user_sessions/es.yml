@@ -1,0 +1,8 @@
+es:
+  login_successful: 'Ingreso exitoso!'
+  logout_successful: 'Salida exitosa!'
+  user_sessions:
+    new:
+      title: 'Ingreso'
+      lost_password: '¿Olvido su contraseña?'
+      submit: 'Ingresar'

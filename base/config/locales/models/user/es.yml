@@ -1,0 +1,22 @@
+es:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              invalid: 'debe ser una direccion valida'
+            login:
+              invalid: 'solo puede contener letras, numeros, espacios y ,-_@'
+    models: 
+      user: 'Cuenta'
+    attributes: 
+      user: 
+        login: 'Identificador'
+        email: 'Correo electrónico'
+        password: 'Contraseña'
+        password_confirmation: 'Confirmación'
+        last_login_at: 'Ultimo ingreso desde'
+        current_login_at: 'Ingreso'
+        last_login_ip: 'Ultimo ingreso desde'
+        current_login_ip: 'Ingreso desde'

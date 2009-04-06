@@ -1,23 +1,23 @@
-- title 'Change Password'
-
-#block-reset.block
+- title t('.title')
+- model_t = lambda{ |attr| User.human_attribute_name(attr) }
+#password_resets-edit.block
   %h2= yield :title
   .content.form
     - form_for @user, :url => password_reset_path(:token => params[:token]), :method => :put do |f|
       = f.error_messages
       .group
         .left
-          = f.label :password, nil, :class => 'label'
+          = f.label :password, model_t['password'], :class => 'label'
         .right
           = f.text_field :password, :class => 'text_field'
         .clear
       .group
         .left
-          = f.label :password_confirmation, 'Confirmation', :class => 'label'
+          = f.label :password_confirmation, model_t['password_confirmation'], :class => 'label'
         .right
           = f.text_field :password_confirmation, :class => 'text_field'
         .clear
       .group
         .right
-          = f.submit "Update Password", :class => 'button'
+          = f.submit t('.submit'), :class => 'button'
         .clear
