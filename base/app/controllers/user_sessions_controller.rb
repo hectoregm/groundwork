@@ -14,6 +14,8 @@ class UserSessionsController < ApplicationController
       flash[:notice] = t :login_successful
       redirect_back_or_default account_url
     else
+      message = @user_session.errors.on(:base) ? @user_session.errors.on(:base) : t(:login_unsuccessful)
+      flash.now[:error] = message
       render :new
     end
   end

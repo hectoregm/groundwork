@@ -51,11 +51,11 @@ Then /^I should see the registration form$/ do
 end
 
 Then /^I should have a successful registration$/ do
-  When 'I should see "Registration completed!"'
+  When 'I should see "Registration completed"'
 end
 
 Then /^I should have an unsuccessful registration$/ do
-  When 'I should not see "Registration completed!"'
+  When 'I should not see "Registration completed"'
 end
 
 Then /^I should be logged in$/ do

@@ -1,5 +1,5 @@
 en:
-  register_successful: 'Registration completed!'
+  register_successful: 'Registration completed. Please check your email to confirm your account'
   change_password: 'Change Password'
   account_updated: 'Account updated!'
   confirm_successful: 'Account confirmed!'

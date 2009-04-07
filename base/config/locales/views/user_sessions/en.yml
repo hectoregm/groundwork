@@ -1,5 +1,6 @@
 en:
   login_successful: 'Login successful!'
+  login_unsuccessful: 'Incorrect login or password'
   logout_successful: 'Logout successful!'
   user_sessions:
     new:

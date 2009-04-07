@@ -1,5 +1,5 @@
 es:
-  register_successful: 'Registro completado'
+  register_successful: 'Registro completado. Revise su correo electrónico para confirmar su cuenta'
   change_password: 'Cambiar Contraseña'
   account_updated: 'Cuenta actualizada'
   confirm_successful: 'Cuenta confirmada'

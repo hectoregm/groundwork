@@ -70,7 +70,7 @@ describe UsersController do
 
       it "should be successful" do
         post :create, :user => {}
-        should set_the_flash(:to => /completed!/)
+        should set_the_flash(:to => /completed/)
       end
 
       it do

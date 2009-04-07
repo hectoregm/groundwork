@@ -249,6 +249,7 @@ body
           input
             :width 460px
             :border 1px solid #262626
+            :vertical-align middle
 
           &.error
 
@@ -277,9 +278,15 @@ body
           :color = !black_darker
           :padding 2px 5px
           :cursor pointer
+          :float left
           +black-border
           +round-top
           +round-bottom
+
+        a
+          :float right
+          :font-size 0.8em
+          :padding-top 9px
 
   .table
 

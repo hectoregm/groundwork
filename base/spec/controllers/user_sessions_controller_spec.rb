@@ -59,6 +59,7 @@ describe UserSessionsController do
       before(:each) do
         UserSession.stub!(:find => nil, :new => mock_user_session)
         mock_user_session.stub!(:save).and_return(false)
+        mock_user_session.errors.stub!(:on).and_return('Incorrect login or password')
       end
 
       it "should re-render login form" do
