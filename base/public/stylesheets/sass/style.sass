@@ -232,6 +232,55 @@ body
       :color #8C8C8C
       :font-size .9em
 
+    fieldset.inputs
+      :border-style none
+
+      ol
+        :list-style-type none
+
+        li
+          :margin-bottom 15px
+
+          label
+            :font
+              :size 1.2em
+              :weight bold
+
+          input
+            :width 460px
+            :border 1px solid #262626
+
+          &.error
+
+            label
+              :color #AA0000
+
+            input
+              :background #F2E1E1
+              :border 1px solid #AA0000
+
+            p
+              :margin 0
+              :padding 0
+              :font
+                :size 0.9em
+                :style italic
+
+    fieldset.buttons
+      :border-style none
+
+      ol
+        :list-style-type none
+
+        input
+          :background = !gray_ultralight
+          :color = !black_darker
+          :padding 2px 5px
+          :cursor pointer
+          +black-border
+          +round-top
+          +round-bottom
+
   .table
 
     th

@@ -3,10 +3,5 @@
 #account-new.block
   %h2= yield :title
   .content.form
-    - form_for @user, :url => account_path do |f|
-      = f.error_messages
+    - semantic_form_for @user, :url => account_path do |f|
       = render :partial => f
-      .group
-        .left
-          = f.submit t :register, :class => 'button'
-        .clear

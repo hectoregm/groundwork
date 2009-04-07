@@ -129,6 +129,8 @@ gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http:/
 gem 'haml'
 gem 'rdiscount'
 gem 'authlogic', :version => "= 2.0.5"
+gem 'justinfrench-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
+
 
 ########## Dependecies Install ##########
 rake 'gems:install', :sudo => true
