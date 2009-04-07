@@ -7,7 +7,7 @@
 begin
   base_dir = ENV['BASE_PATH']
   app_dir = Dir.pwd
-  app_name = File.basename app_dir
+  app_name = File.basename(app_dir).capitalize
   raise ScriptError, "Please setup env variable BASE_PATH" if base_dir.nil?
 rescue ScriptError => e
   puts e.message
@@ -244,6 +244,14 @@ spec 'helpers/layout_helper_spec.rb'
 
 # Get i18n files
 cp_r 'config/locales', 'config'
+
+# Replace APP with the app name.
+gsub_file('app/views/layouts/single_column.html.haml', /APP/, app_name)
+gsub_file('app/views/layouts/application.html.haml', /APP/, app_name)
+gsub_file('app/models/user_mailer.rb', /APP/, app_name)
+gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)
+gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)
+gsub_file('config/locales/views/user_mailer/es.yml', /APP/, app_name)
 
 # Send initial commit
 git :add => "."
