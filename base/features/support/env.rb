@@ -5,6 +5,7 @@ require 'cucumber/rails/world'
 require 'email_spec/cucumber'
 require 'cucumber/formatters/unicode' # Comment out this line if you don't want Cucumber Unicode support
 Cucumber::Rails.use_transactional_fixtures
+Cucumber::Rails.bypass_rescue
 
 require 'webrat'
 
