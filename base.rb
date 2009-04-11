@@ -173,6 +173,9 @@ environment(%q|config.i18n.load_path += Dir[Rails.root.join('config', 'locales',
 # Add ruby-debug to development environment
 environment("require 'ruby-debug'", :env => 'development')
 
+# General helpers for rspec
+spec 'spec_helpers/application_spec_helper.rb'
+
 ########## Authlogic Setup ##########
 
 # Rspec helper for authlogic

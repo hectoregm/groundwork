@@ -5,13 +5,7 @@
   .content.form
     %p= t('.instructions')
     - form_tag password_reset_path do
-      .group
-        .left
-          = label_tag :email, User.human_attribute_name('email'), :class => 'label'
-        .right
-          = text_field_tag :email, nil, :class => 'text_field'
-        .clear
-      .group
-        .right
-          = submit_tag t('.submit'), :class => 'button'
-        .clear
+      %fieldset.inputs
+        %ol
+          %li= text_field_i18n(User, :email)
+      = submit_button(t '.submit')

@@ -5,6 +5,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/authentication_spec_helper")
 require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/controller_spec_helper")
+require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/application_spec_helper")
 require 'spec/autorun'
 require 'spec/rails'
 require 'authlogic/test_case'
@@ -15,6 +16,7 @@ require 'email_spec/matchers'
 Spec::Runner.configure do |config|
   config.include(Authentication::SpecHelpers)
   config.include(ControllerSpecHelper, :type => :controller)
+  config.include(ApplicationSpecHelper)
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
 
@@ -23,4 +25,9 @@ Spec::Runner.configure do |config|
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
   config.before(:each) { Sham.reset }
+  config.prepend_before(:all, :type => :helper) do
+    helper.extend Haml
+    helper.extend Haml::Helpers
+    helper.send :init_haml_helpers
+  end
 end
