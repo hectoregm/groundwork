@@ -1,12 +1,9 @@
 - title t('.title')
 
 #account-edit.block
-  .content
-    %h2= yield :title
-  .inner
-    - form_for @user, :url => account_path do |f|
-      = f.error_messages
-      = render :partial => f
-      = f.submit t('.submit')
+  %h2= yield :title
+  .content.form.inner
+    - semantic_form_for @user, :url => account_path do |f|
+      = render :partial => f, :locals => { :label => t('.submit') }
     %br
     = link_to t('.profile'), account_path

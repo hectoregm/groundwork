@@ -210,7 +210,6 @@ controller 'home_controller.rb'
 # Get views
 view "users", "new.html.haml"
 view "users", "edit.html.haml"
-view "users", "_form.html.haml"
 view 'users', '_semantic_form.html.haml'
 view "users", "show.html.haml"
 view "user_sessions", "new.html.haml"
