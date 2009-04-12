@@ -120,15 +120,15 @@ git :init
 gem "rspec", :lib => false, :env => 'test'
 gem "rspec-rails", :lib => false, :env => 'test'
 gem 'webrat', :lib => 'webrat', :env => 'test'
-gem 'aslakhellesoy-cucumber', :lib => 'cucumber', :env => 'test', :source => "http://gems.github.com", :version => '= 0.2.3.2'
+gem 'aslakhellesoy-cucumber', :lib => 'cucumber', :env => 'test', :source => "http://gems.github.com", :version => '= 0.2.3.3'
 gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => "http://gems.github.com"
-gem 'carlosbrando-remarkable', :lib => 'remarkable', :env => 'test', :source => "http://gems.github.com"
+gem 'remarkable_rails', :env => 'test'
 gem 'hectoregm-email_spec', :lib => 'email_spec', :env => 'test', :source => "http://gems.github.com"
 gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => "http://gems.github.com"
 gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
 gem 'haml'
 gem 'rdiscount'
-gem 'authlogic', :version => "= 2.0.5"
+gem 'authlogic', :version => "= 2.0.9"
 gem 'justinfrench-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
 
 

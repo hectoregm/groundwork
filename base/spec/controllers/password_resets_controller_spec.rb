@@ -54,7 +54,7 @@ describe PasswordResetsController do
         User.should_receive(:find_by_email).with("mock@mail.com").and_return(nil)
 
         post :create, :email => "mock@mail.com"
-        should_not assign_to(:user)
+        should assign_to(:user, :with => nil)
       end
 
       it "should re-render the reset password form" do
