@@ -4,6 +4,7 @@
 config/database.yml
 config/mongrel_cluster.yml
 coverage
+coverage.data
 db/schema.rb
 db/*.sqlite3
 doc/api

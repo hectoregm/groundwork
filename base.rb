@@ -143,6 +143,7 @@ generate :email_spec
 generate :forgery
 
 # Configuration rspec
+spec 'rcov.opts'
 spec 'spec.opts'
 spec 'spec_helper.rb'
 spec 'blueprints.rb'
@@ -153,6 +154,7 @@ root_config 'cucumber.yml'
 feature 'support/env.rb'
 feature 'support/paths.rb'
 rakefile 'cucumber.rake', get_source('lib/tasks/cucumber.rake')
+rakefile 'rcov.rake', get_source('lib/tasks/rcov.rake')
 
 # Email testing setup
 feature 'step_definitions/custom_email_steps.rb'
