@@ -91,3 +91,7 @@ $ rails <name app> -m rails-template/base.rb
 * [haml](http://github.com/nex3/haml/tree/master)
 * [web-app-theme](http://github.com/pilu/web-app-theme/tree/master)
 * [rdiscount](http://github.com/rtomayko/rdiscount/tree/master)
+* [formtastic](http://github.com/justinfrench/formtastic/tree/master)
+
+## Licence
+Copyright 2009 Hector E. Gomez M. Released under the MIT license
