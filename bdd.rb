@@ -1,11 +1,16 @@
+# BDD template. Uses rspec, cucumber and friends.
+log 'template', 'Applying BDD template'
+
 begin
-  raise ScriptError, "This application has already BDD tools" if File.exists?('spec/spec_helper.rb')
+  raise ScriptError, "This application already has BDD tools" if File.exists?('spec/spec_helper.rb')
 rescue ScriptError => e
   puts e.message
   Kernel::exit(1)
 end
 
-load_template('../rails-templates/methods.rb') unless self.respond_to?(:spec)
+unless self.respond_to?(:spec)
+  load_template('http://github.com/hectoregm/rails-templates/raw/master/methods.rb')
+end
 
 # Add gem dependencies
 gem "rspec", :lib => false, :env => 'test'
@@ -48,3 +53,5 @@ feature 'step_definitions/email_steps.rb'
 
 # Get autotest config file.
 root_config ".autotest"
+
+log 'template', 'Successfully applied BDD template'

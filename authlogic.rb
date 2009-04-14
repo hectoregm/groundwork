@@ -1,3 +1,6 @@
+# Authlogic template.
+log 'template', 'Applying authlogic template'
+
 # Add plugins.
 # plugin 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true
 
@@ -100,3 +103,6 @@ gsub_file('app/models/user_mailer.rb', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/es.yml', /APP/, app_name)
+
+# Authlogic template.
+log 'template', 'Successfully applied authlogic template'

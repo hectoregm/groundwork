@@ -1,3 +1,6 @@
+# Git template.
+log 'template', 'Applying git template'
+
 begin
   raise ScriptError, "This application is already using git." if File.exists?('.git/config')
 rescue ScriptError => e
@@ -5,7 +8,10 @@ rescue ScriptError => e
   Kernel::exit(1)
 end
 
-load_template('../rails-templates/methods.rb') unless self.respond_to?(:root_config)
+unless self.respond_to?(:root_config)
+  @stand_alone = true
+  load_template('http://github.com/hectoregm/rails-templates/raw/master/methods.rb')
+end
 
 # Remove tmp directories
 %w[tmp/pids tmp/sessions tmp/sockets tmp/cache].each do |dir|
@@ -28,3 +34,11 @@ root_config '.gitignore'
 
 # Initialize git repository
 git :init
+
+if @stand_alone
+  # Send initial commit
+  git :add => "."
+  git :commit => "-a -m 'Setting up git repository'"
+end
+
+log 'template', 'Successfully applied git template'
