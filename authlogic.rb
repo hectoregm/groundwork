@@ -17,10 +17,10 @@ run("haml --rails .")
 initializer "action_mailer.rb", get_source("config/initializers/action_mailer.rb")
 
 # Set I18n load path
-environment(%q|config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]|)
+environment(%q|config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]|)
 
-# Add ruby-debug to development environment
-environment("require 'ruby-debug'", :env => 'development')
+# Add ruby-debug to development environment (ruby18 only)
+environment("require 'ruby-debug' if RUBY_VERSION < '1.9'", :env => 'development')
 
 ########## Authlogic Setup ##########
 

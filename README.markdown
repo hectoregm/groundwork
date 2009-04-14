@@ -76,6 +76,7 @@ $ rails <name app> -m rails-template/base.rb
 ## TODO
 * Authorization
 * Basic Administration
+* Ruby 1.9 Compatibility
 
 ## Links
 * [Git](http://git-scm.com/)
