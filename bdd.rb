@@ -2,7 +2,7 @@
 log 'template', 'Applying BDD template'
 
 begin
-  raise ScriptError, "This application already has BDD tools" if File.exists?('spec/spec_helper.rb')
+  raise ScriptError, 'This application already has BDD tools' if File.exists?('spec/spec_helper.rb')
 rescue ScriptError => e
   puts e.message
   Kernel::exit(1)
@@ -13,11 +13,9 @@ unless self.respond_to?(:spec)
 end
 
 # Cucumber gem dependencies
-gem 'term-ansicolor', :lib => false, :env => 'test'
-gem 'treetop', :lib => false, :env => 'test'
-gem 'diff-lcs', :lib => false, :env => 'test'
-gem 'nokogiri', :lib => false, :env => 'test'
-gem 'builder', :lib => false, :env => 'test'
+%w{term-ansicolor treetop diff-lcs nokogiri builder}.each do |package|
+  gem package, :lib => false, :env => 'test'
+end
 
 # Add gem dependencies
 gem 'rspec', :version => '= 1.2.4', :lib => false, :env => 'test'
@@ -26,7 +24,7 @@ gem 'webrat', :version => '= 0.4.4', :lib => 'webrat', :env => 'test'
 gem 'cucumber', :version => '= 0.3.0', :env => 'test'
 gem 'remarkable_rails', :lib => false, :env => 'test'
 gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => 'http://gems.github.com'
-gem 'hectoregm-email_spec', :lib => 'email_spec', :env => 'test', :source => "http://gems.github.com"
+gem 'hectoregm-email_spec', :lib => 'email_spec', :env => 'test', :source => 'http://gems.github.com'
 gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => 'http://gems.github.com'
 gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
 

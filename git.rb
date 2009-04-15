@@ -27,7 +27,7 @@ end
 run("find . \\( -type d -empty \\) -and \\( -not -regex ./\\.git.* \\) -exec touch {}/.gitignore \\;", false)
 
 # Copy database.yml for distribution use
-cp "config/database.yml", "config/database.yml.example"
+cp 'config/database.yml', 'config/database.yml.example'
 
 # Create  master .gitignore file
 root_config '.gitignore'
