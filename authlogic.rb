@@ -8,7 +8,7 @@ log 'template', 'Applying authlogic template'
 gem 'haml'
 gem 'rdiscount'
 gem 'authlogic', :version => "= 2.0.9"
-gem 'justinfrench-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
+gem 'hectoregm-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
 
 ########## Dependecies Install ##########
 rake 'gems:install', :sudo => true
