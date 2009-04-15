@@ -1,13 +1,13 @@
-# This file is copied to ~/spec when you run 'ruby script/generate rspec'
-# from the project root directory.
-ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+ENV["RAILS_ENV"] ||= 'test'
+require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
 require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/authentication_spec_helper")
 require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/controller_spec_helper")
 require File.expand_path(File.dirname(__FILE__) + "/spec_helpers/application_spec_helper")
 require 'spec/autorun'
 require 'spec/rails'
+require 'remarkable_activerecord' # Ruby 1.9 Workaround
+require 'remarkable_rails'
 require 'authlogic/test_case'
 require 'email_spec/helpers'
 require 'email_spec/matchers'

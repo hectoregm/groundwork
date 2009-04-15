@@ -82,7 +82,7 @@ describe UserSessionsController do
 
     it_should_behave_like "an action that requires logged in user"
 
-    context do
+    context "With user logged in" do
 
       before(:each) do
         UserSession.stub!(:find).and_return(mock_user_session)

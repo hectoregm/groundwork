@@ -12,15 +12,22 @@ unless self.respond_to?(:spec)
   load_template('http://github.com/hectoregm/rails-templates/raw/master/methods.rb')
 end
 
+# Cucumber gem dependencies
+gem 'term-ansicolor', :lib => false, :env => 'test'
+gem 'treetop', :lib => false, :env => 'test'
+gem 'diff-lcs', :lib => false, :env => 'test'
+gem 'nokogiri', :lib => false, :env => 'test'
+gem 'builder', :lib => false, :env => 'test'
+
 # Add gem dependencies
-gem "rspec", :lib => false, :env => 'test'
-gem "rspec-rails", :lib => false, :env => 'test'
-gem 'webrat', :lib => 'webrat', :env => 'test'
-gem 'aslakhellesoy-cucumber', :lib => 'cucumber', :env => 'test', :source => "http://gems.github.com", :version => '= 0.2.3.3'
-gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => "http://gems.github.com"
-gem 'remarkable_rails', :env => 'test'
+gem 'rspec', :version => '= 1.2.4', :lib => false, :env => 'test'
+gem 'rspec-rails', :version => '= 1.2.4', :lib => false, :env => 'test'
+gem 'webrat', :version => '= 0.4.4', :lib => 'webrat', :env => 'test'
+gem 'cucumber', :version => '= 0.3.0', :env => 'test'
+gem 'remarkable_rails', :lib => false, :env => 'test'
+gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => 'http://gems.github.com'
 gem 'hectoregm-email_spec', :lib => 'email_spec', :env => 'test', :source => "http://gems.github.com"
-gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => "http://gems.github.com"
+gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => 'http://gems.github.com'
 gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
 
 # Install gems
