@@ -1,15 +1,25 @@
 # Convenience Methods
-def get_root(relative_destination)
+FEATURES = [:git, :bdd, :authlogic]
+
+def get_base_path(relative_destination)
   base_dir = ENV['BASE_PATH'] || "http://github.com/hectoregm/rails-templates/raw/master/base"
   File.join(base_dir, relative_destination)
 end
 
 def apply_template(name)
-  load_template(get_root("../#{name.to_s}.rb"))
+  load_template(get_base_path("../#{name.to_s}.rb"))
 end
 
 def app_name
-  File.basename(@app_dir).capitalize
+  File.basename(Dir.pwd).capitalize
+end
+
+def requested?(feature)
+  if ENV['FEATURES']
+    ENV['FEATURES'].split.include?(feature.to_s)
+  else
+    FEATURES.include?(feature)
+  end
 end
 
 def cp(source, destination)
@@ -19,7 +29,7 @@ end
 
 def cp_r(source, destination)
   log 'cp_r', source
-  run("cp -Rp #{get_root(source)} #{destination}", false)
+  run("cp -Rp #{get_base_path(source)} #{destination}", false)
 end
 
 def rm(filename)
@@ -33,7 +43,7 @@ def rmdir(dir)
 end
 
 def get_source(relative_destination)
-  destination = get_root(relative_destination)
+  destination = get_base_path(relative_destination)
   ouput = open(destination, 'r') { |file| file.read }
 end
 

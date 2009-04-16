@@ -6,26 +6,23 @@
 # Get environment variables
 begin
   base_dir = ENV['BASE_PATH']
-  @app_dir = Dir.pwd
   raise ScriptError, "Please setup env variable BASE_PATH" if base_dir.nil?
 rescue ScriptError => e
   puts e.message
   puts "$ export BASE_PATH=<path to rails-template/base directory>"
-  run("rm -rf #{app_dir}")
   Kernel::exit(1)
 end
 
 # Mix in convenience methods
 load_template(File.join(base_dir, "../methods.rb"))
 
-# Apply Git template
-apply_template(:git)
+# Apply subtemplates
+FEATURES.each do |feature|
+  apply_template(feature)
+end
 
-# Apply BDD template
-apply_template(:bdd)
-
-# Apply Authlogic template
-apply_template(:authlogic)
+# Add ruby-debug to development environment (ruby18 only)
+environment("require 'ruby-debug' if RUBY_VERSION < '1.9'", :env => 'development')
 
 # Send initial commit
 git :add => "."

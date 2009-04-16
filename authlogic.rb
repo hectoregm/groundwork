@@ -1,19 +1,28 @@
 # Authlogic template.
 log 'template', 'Applying authlogic template'
 
-# Add plugins.
-# plugin 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :submodule => true
+begin
+  raise ScriptError, "This application is already using authlogic." if File.exists?('spec/spec_helpers/authentication_spec_helper.rb')
+rescue ScriptError => e
+  puts e.message
+  Kernel::exit(1)
+end
 
-# Install gems
+unless self.respond_to?(:model)
+  @stand_alone = true
+  load_template('http://github.com/hectoregm/rails-templates/raw/master/methods.rb')
+end
+
+# Add gem dependencies
 gem 'haml'
 gem 'rdiscount'
-gem 'authlogic', :version => "= 2.0.9"
 gem 'hectoregm-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
+gem 'authlogic', :version => "= 2.0.9"
 
-########## Dependecies Install ##########
+# Install gems
 rake 'gems:install', :sudo => true
 
-########## Application Setup ##########
+# Haml setup
 run("haml --rails .")
 
 # Initializer for action_mailer configuration
@@ -21,11 +30,6 @@ initializer "action_mailer.rb", get_source("config/initializers/action_mailer.rb
 
 # Set I18n load path
 environment(%q|config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]|)
-
-# Add ruby-debug to development environment (ruby18 only)
-environment("require 'ruby-debug' if RUBY_VERSION < '1.9'", :env => 'development')
-
-########## Authlogic Setup ##########
 
 # Rspec helper for authlogic
 spec 'spec_helpers/authentication_spec_helper.rb'
@@ -80,18 +84,20 @@ layout 'single_column.html.haml'
 # Get stylesheets
 cp_r "public/stylesheets/sass", "public/stylesheets"
 
-# Get authentication related cucumber features
-cp_r "features/registration", "features"
-cp_r "features/authentication", "features"
-cp_r "features/password_reset", "features"
+if requested? :bdd
+  # Get authentication related cucumber features
+  cp_r "features/registration", "features"
+  cp_r "features/authentication", "features"
+  cp_r "features/password_reset", "features"
 
-# Get rspec tests
-spec 'models/user_spec.rb'
-spec 'models/user_mailer_spec.rb'
-spec 'controllers/users_controller_spec.rb'
-spec 'controllers/user_sessions_controller_spec.rb'
-spec 'controllers/password_resets_controller_spec.rb'
-spec 'helpers/layout_helper_spec.rb'
+  # Get rspec tests
+  spec 'models/user_spec.rb'
+  spec 'models/user_mailer_spec.rb'
+  spec 'controllers/users_controller_spec.rb'
+  spec 'controllers/user_sessions_controller_spec.rb'
+  spec 'controllers/password_resets_controller_spec.rb'
+  spec 'helpers/layout_helper_spec.rb'
+end
 
 # Get i18n files
 cp_r 'config/locales', 'config'
@@ -103,6 +109,12 @@ gsub_file('app/models/user_mailer.rb', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/es.yml', /APP/, app_name)
+
+if @stand_alone
+  rm 'public/index.html'
+  rake 'db:migrate'
+  rake 'db:test:load'
+end
 
 # Authlogic template.
 log 'template', 'Successfully applied authlogic template'
