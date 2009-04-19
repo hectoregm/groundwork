@@ -9,7 +9,7 @@ begin
   raise ScriptError, "Please setup env variable BASE_PATH" if base_dir.nil?
 rescue ScriptError => e
   puts e.message
-  puts "$ export BASE_PATH=<path to rails-template/base directory>"
+  puts "$ export BASE_PATH=<path to groundwork/base directory>"
   Kernel::exit(1)
 end
 

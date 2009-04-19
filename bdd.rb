@@ -9,7 +9,7 @@ rescue ScriptError => e
 end
 
 unless self.respond_to?(:spec)
-  load_template('http://github.com/hectoregm/rails-templates/raw/master/methods.rb')
+  load_template('http://github.com/hectoregm/groundwork/raw/master/methods.rb')
 end
 
 # Cucumber gem dependencies

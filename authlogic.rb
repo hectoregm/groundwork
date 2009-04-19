@@ -10,13 +10,13 @@ end
 
 unless self.respond_to?(:model)
   @stand_alone = true
-  load_template('http://github.com/hectoregm/rails-templates/raw/master/methods.rb')
+  load_template('http://github.com/hectoregm/groundwork/raw/master/methods.rb')
 end
 
 # Add gem dependencies
 gem 'haml'
 gem 'rdiscount'
-gem 'hectoregm-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
+gem 'justinfrench-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
 gem 'authlogic', :version => "= 2.0.9"
 
 # Install gems

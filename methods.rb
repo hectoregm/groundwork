@@ -2,7 +2,7 @@
 FEATURES = [:git, :bdd, :authlogic]
 
 def get_base_path(relative_destination)
-  base_dir = ENV['BASE_PATH'] || "http://github.com/hectoregm/rails-templates/raw/master/base"
+  base_dir = ENV['BASE_PATH'] || "http://github.com/hectoregm/groundwork/raw/master/base"
   File.join(base_dir, relative_destination)
 end
 

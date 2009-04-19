@@ -1,5 +1,5 @@
-# Base Application Template
-Base is a rails template that has the goal to jump-start the
+# Groundwork
+Groundwork is a set of rails templates that has the goal to jump-start the
 development of rails applications by helping in the configuration of
 development environment and with the implementation of features present
 in the majority of web applications:
@@ -32,6 +32,16 @@ help in the specification of behaviors.
 
 The template has 100% test code coverage.
 
+### Remote Standalone templates.
+Groundwork is compose of several templates, some have been
+implemented so they can be used remotely and/or in existing rails applications:
+
+`
+$ rake rails:template LOCATION=http://github.com/hectoregm/groundwork/raw/master/<template>.rb
+`
+
+Right now you can use git and bdd templates in this way.
+
 ### Differences against Bort, BaseApp, etc
 
 The main philosophy driving base is KISS: Keep it Short and Simple.
@@ -51,16 +61,16 @@ The following packages must be installed:
 
 ## Use
 The `BASE_PATH` env variable must be set with the path to the base
-directory of the rails-template repository
+directory of the groundwork repository
 
 `
-$ export BASE_PATH = <path to rails-template/base directory>
+$ export BASE_PATH = <path to groundwork/base directory>
 `
 
 Then to generate the rails app we use:
 
 `
-$ rails <name app> -m rails-template/base.rb
+$ rails <name app> -m groundwork/base.rb
 `
 
 ## Implemented Features
@@ -72,11 +82,11 @@ $ rails <name app> -m rails-template/base.rb
 * Test Coverage: >= 95%.
 * Basic Layout (Based in pilu/web-app-theme).
 * Internationalization. (:es being the only translated language)
+* Ruby 1.9 Compatibility
 
 ## TODO
 * Authorization
 * Basic Administration
-* Ruby 1.9 Compatibility
 
 ## Links
 * [Git](http://git-scm.com/)

@@ -10,7 +10,7 @@ end
 
 unless self.respond_to?(:root_config)
   @stand_alone = true
-  load_template('http://github.com/hectoregm/rails-templates/raw/master/methods.rb')
+  load_template('http://github.com/hectoregm/groundwork/raw/master/methods.rb')
 end
 
 # Remove tmp directories
