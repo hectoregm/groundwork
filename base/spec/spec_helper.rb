@@ -25,9 +25,4 @@ Spec::Runner.configure do |config|
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
   config.before(:each) { Sham.reset }
-  config.prepend_before(:all, :type => :helper) do
-    helper.extend Haml
-    helper.extend Haml::Helpers
-    helper.send :init_haml_helpers
-  end
 end

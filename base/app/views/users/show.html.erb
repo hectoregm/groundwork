@@ -1,0 +1,26 @@
+<% title t('.title') -%>
+<% model_t = lambda { |attr| User.human_attribute_name(attr) } -%>
+<div id="account-show" class="block">
+  <div class="content">
+    <h2><%= yield :title %></h2>
+    <div class="inner">
+      <p>
+        <b><%= model_t['login'] %></b>
+        <%= @user.login %>
+      </p>
+      <p>
+        <b><%= model_t['last_login_at'] %></b>
+        <%= @user.last_login_at %>
+      </p>
+      <p>
+        <b><%= model_t['last_login_ip'] %></b>
+        <%= @user.last_login_ip %>
+      </p>
+      <p>
+        <b><%= model_t['current_login_ip'] %></b>
+        <%= @user.current_login_ip %>
+      </p>
+      <%= link_to t('.edit'), edit_account_path %>
+    </div>
+  </div>
+</div>

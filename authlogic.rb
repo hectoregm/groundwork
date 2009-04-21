@@ -14,7 +14,7 @@ unless self.respond_to?(:model)
 end
 
 # Add gem dependencies
-gem 'haml'
+gem 'haml' if templating_engine == "haml"
 gem 'rdiscount'
 gem 'justinfrench-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
 gem 'authlogic', :version => "= 2.0.9"
@@ -23,7 +23,7 @@ gem 'authlogic', :version => "= 2.0.9"
 rake 'gems:install', :sudo => true
 
 # Haml setup
-run("haml --rails .")
+run("haml --rails .") if templating_engine == "haml"
 
 # Initializer for action_mailer configuration
 initializer "action_mailer.rb", get_source("config/initializers/action_mailer.rb")
@@ -61,30 +61,52 @@ controller "password_resets_controller.rb"
 controller 'home_controller.rb'
 
 # Get views
-view "users", "new.html.haml"
-view "users", "edit.html.haml"
-view 'users', '_semantic_form.html.haml'
-view "users", "show.html.haml"
-view "user_sessions", "new.html.haml"
-view "user_mailer", "activation.text.html.haml"
-view "user_mailer", "reset_password_instructions.text.html.haml"
-view "user_mailer", "signup_notification.text.html.haml"
-view "password_resets", "new.html.haml"
-view "password_resets", "edit.html.haml"
-view 'home', 'index.html.haml'
-view 'home', 'index.es.html.haml'
+view "users", "new.html.#{templating_engine}"
+view "users", "edit.html.#{templating_engine}"
+view 'users', "_semantic_form.html.#{templating_engine}"
+view "users", "show.html.#{templating_engine}"
+view "user_sessions", "new.html.#{templating_engine}"
+view "user_mailer", "activation.text.html.#{templating_engine}"
+view "user_mailer", "reset_password_instructions.text.html.#{templating_engine}"
+view "user_mailer", "signup_notification.text.html.#{templating_engine}"
+view "password_resets", "new.html.#{templating_engine}"
+view "password_resets", "edit.html.#{templating_engine}"
+view 'home', "index.html.#{templating_engine}"
+view 'home', "index.es.html.#{templating_engine}"
 
 #Get helpers
 helper 'layout_helper.rb'
+helper "#{templating_engine}_helper.rb"
 
 # Modify layouts
-layout "application.html.haml"
-layout 'single_column.html.haml'
+layout "application.html.#{templating_engine}"
+layout "single_column.html.#{templating_engine}"
 
 # Get stylesheets
-cp_r "public/stylesheets/sass", "public/stylesheets"
+if templating_engine == "haml"
+  sass 'base.sass'
+  sass 'behaviors.sass'
+  sass 'colors.sass'
+  sass 'style.sass'
+else
+  stylesheet 'base.css'
+  stylesheet 'style.css'
+end
+
 
 if requested? :bdd
+  if templating_engine == "haml"
+    haml_setup = <<-EOF.gsub(/^( ){4}/, '')
+      config.prepend_before(:all, :type => :helper) do
+        helper.extend Haml
+        helper.extend Haml::Helpers
+        helper.send :init_haml_helpers
+      end
+    end
+    EOF
+    gsub_file('spec/spec_helper.rb', /end\n$/, haml_setup)
+  end
+
   # Get authentication related cucumber features
   cp_r "features/registration", "features"
   cp_r "features/authentication", "features"
@@ -97,14 +119,15 @@ if requested? :bdd
   spec 'controllers/user_sessions_controller_spec.rb'
   spec 'controllers/password_resets_controller_spec.rb'
   spec 'helpers/layout_helper_spec.rb'
+  spec "helpers/#{templating_engine}_helper_spec.rb"
 end
 
 # Get i18n files
 cp_r 'config/locales', 'config'
 
 # Replace APP with the app name.
-gsub_file('app/views/layouts/single_column.html.haml', /APP/, app_name)
-gsub_file('app/views/layouts/application.html.haml', /APP/, app_name)
+gsub_file("app/views/layouts/single_column.html.#{templating_engine}", /APP/, app_name)
+gsub_file("app/views/layouts/application.html.#{templating_engine}", /APP/, app_name)
 gsub_file('app/models/user_mailer.rb', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)
 gsub_file('config/locales/views/user_mailer/en.yml', /APP/, app_name)

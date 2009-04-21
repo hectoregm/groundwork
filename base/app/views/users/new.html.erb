@@ -1,0 +1,10 @@
+<% title t '.title' -%>
+
+<div id="account-new" class="block">
+  <h2><%= yield :title %></h2>
+  <div class="content form">
+    <% semantic_form_for @user, :url => account_path do |f| -%>
+      <%= render :partial => f, :locals => { :label => t(:register) } %>
+    <% end -%>
+  </div>
+</div>

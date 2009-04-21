@@ -1,0 +1,16 @@
+<% title t('.title') -%>
+<div id="password_resets-new" class="block">
+  <h2><%= yield :title %></h2>
+  <div class="content form">
+    <p><%= t('.instructions') %></p>
+    <% form_tag password_reset_path do -%>
+    <fieldset class="inputs">
+      <ol>
+        <li><%= text_field_i18n(User, :email) %></li>
+      </ol>
+    </fieldset>
+    <%= submit_button(t '.submit') %>
+    <% end -%>
+    <div class="clear"></div>
+  </div>
+</div>

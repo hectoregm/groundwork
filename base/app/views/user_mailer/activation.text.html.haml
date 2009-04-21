@@ -1,6 +1,7 @@
 !!! Strict
-%html
+%html{html_attrs(I18n.locale.to_s)}
   %head
+    %meta{ :context => 'text/html;charset=UTF-8', "http-equiv" => 'content-type'}
   %body
     %p= t('user_mailer.activation.thanks')
     %p= t('user_mailer.activation.body', :user => @user.login, :link => root_url, :locale => I18n.locale)

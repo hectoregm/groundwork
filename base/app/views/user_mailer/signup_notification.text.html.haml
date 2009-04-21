@@ -1,6 +1,7 @@
 !!! Strict
-%html
+%html{html_attrs(I18n.locale.to_s)}
   %head
+    %meta{ :context => 'text/html;charset=UTF-8', "http-equiv" => 'content-type'}
   %body
     %h2= t('user_mailer.signup_notification.title')
     %p= t('user_mailer.signup_notification.body')

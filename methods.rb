@@ -1,5 +1,6 @@
 # Convenience Methods
 FEATURES = [:git, :bdd, :authlogic]
+TEMPLATING_ENGINE = "haml"
 
 def get_base_path(relative_destination)
   base_dir = ENV['BASE_PATH'] || "http://github.com/hectoregm/groundwork/raw/master/base"
@@ -20,6 +21,10 @@ def requested?(feature)
   else
     FEATURES.include?(feature)
   end
+end
+
+def templating_engine
+  ENV['TEMPLATING_ENGINE'] || TEMPLATING_ENGINE
 end
 
 def cp(source, destination)
@@ -85,4 +90,14 @@ end
 def layout(filename)
   log 'layout', filename
   file("app/views/layouts/#{filename}", get_source("app/views/layouts/#{filename}"), false)
+end
+
+def stylesheet(filename)
+  log 'stylesheet', filename
+  file("public/stylesheets/#{filename}", get_source("public/stylesheets/#{filename}"), false)
+end
+
+def sass(filename)
+  log 'sass', filename
+  file("public/stylesheets/sass/#{filename}", get_source("public/stylesheets/sass/#{filename}"), false)
 end

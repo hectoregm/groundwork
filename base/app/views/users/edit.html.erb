@@ -1,0 +1,12 @@
+<% title t('.title') -%>
+
+<div id="account-edit" class="block">
+  <h2><%= yield :title %></h2>
+  <div class="content form inner">
+    <% semantic_form_for @user, :url => account_path do |f| -%>
+      <%= render :partial => f, :locals => { :label => t('.submit') } %>
+    <% end -%>
+    <br />
+    <%= link_to t('.profile'), account_path %>
+  </div>
+</div>

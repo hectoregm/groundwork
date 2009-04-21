@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html <%= locale_attrs %>>
+  <head>
+    <meta content='text/html;charset=UTF-8' http-equiv='content-type' />
+    <title><%= yield(:title) || "APP" %></title>
+    <%= stylesheet_link_tag 'base' %>
+    <%= stylesheet_link_tag 'style' %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <div id="container">
+      <div id="header">
+        <h1><%= link_to 'APP', root_path %></h1>
+        <% if current_user -%>
+        <div id="user-navigation">
+          <ul>
+            <li><%= link_to t(:profile), account_path %></li>
+            <li><%= link_to t(:logout), logout_path %></li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+        <% end -%>
+        <div id="main-navigation">
+          <ul>
+            <li class="active"><%= link_to t(:home), root_path%></li>
+            <% if !current_user -%>
+            <li><%= link_to t(:login), login_path %></li>
+            <li><%= link_to t(:register), new_account_path %></li>
+            <% end -%>
+          </ul>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div id="wrapper">
+        <div id="main">
+          <div class="block">
+            <div class="flash">
+              <% flash.each do |name, mesg| -%>
+              <div class="<%= "message #{name}" %>">
+                <p><%= h mesg %></p>
+              </div>
+              <% end -%>
+            </div>
+            <div class="content">
+              <%= yield %>
+            </div>
+          </div>
+          <div id="footer">
+            <div class="block">
+              <p><%= t(:copyright) %></p>
+            </div>
+          </div>
+        </div>
+        <div id="sidebar">
+          <div class="block">
+            <h3><%= yield :title_sidebar %></h3>
+            <div class="content">
+              <p><%= yield :sidebar %></p>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </body>
+</html>

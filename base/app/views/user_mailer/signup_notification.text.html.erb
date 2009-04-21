@@ -1,0 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <meta content='text/html;charset=UTF-8' http-equiv='content-type' />
+  </head>
+  <body>
+    <h2><%= t('user_mailer.signup_notification.title') %></h2>
+    <p><%= t('user_mailer.signup_notification.body') %></p>
+    <p><%= confirm_account_url(:token => @user.perishable_token, :locale => I18n.locale) %></p>
+    <p><%= t('user_mailer.signup_notification.login_credentials') %></p>
+    <p>
+    <%= User.human_attribute_name('login')+ ": " + @user.login %>
+    <br />
+    <%= User.human_attribute_name('password') + ": " + @user.password %>
+    </p>
+  </body>
+</html>

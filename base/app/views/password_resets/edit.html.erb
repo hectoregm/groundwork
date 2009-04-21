@@ -1,0 +1,12 @@
+<% title t('.title') -%>
+<div id="password_resets-edit" class="block">
+  <h2><%= yield :title %></h2>
+  <div class="content form">
+    <% semantic_form_for @user, :url => password_reset_path(:token => params[:token]), :method => :put do |f| -%>
+      <%= f.inputs :password, :password_confirmation %>
+      <% f.buttons do -%>
+        <%= f.commit_button t('.submit') %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>

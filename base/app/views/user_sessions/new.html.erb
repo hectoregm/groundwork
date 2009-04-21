@@ -1,0 +1,18 @@
+<% title t '.title' -%>
+
+<div id="user_sessions-new" class="block">
+  <h2><%= yield :title %></h2>
+  <div class="content form">
+    <% semantic_form_for @user_session, :url => user_session_path do |f| -%>
+      <% f.inputs do -%>
+        <%= f.input :login, :required => false%>
+        <%= f.input :password, :required => false%>
+        <%= f.input :remember_me, :required => false, :as => :boolean, :class => 'checkbox' %>
+      <% end -%>
+      <% f.buttons do -%>
+        <%= f.commit_button t('.submit') %>
+        <%= link_to t('.lost_password'), new_password_reset_path %>
+      <% end -%>
+    <% end -%>
+  </div>
+</div>
