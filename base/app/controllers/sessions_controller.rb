@@ -1,20 +1,20 @@
-class UserSessionsController < ApplicationController
+class SessionsController < ApplicationController
   layout 'single_column'
 
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
 
   def new
-    @user_session = UserSession.new
+    @session = UserSession.new
   end
 
   def create
-    @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
+    @session = UserSession.new(params[:user_session])
+    if @session.save
       flash[:notice] = t :login_successful
       redirect_back_or_default account_url
     else
-      message = @user_session.errors.on(:base) ? @user_session.errors.on(:base) : t(:login_unsuccessful)
+      message = @session.errors.on(:base) ? @session.errors.on(:base) : t(:login_unsuccessful)
       flash.now[:error] = message
       render :new
     end

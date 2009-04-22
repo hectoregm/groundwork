@@ -1,9 +1,9 @@
 <% title t '.title' -%>
 
-<div id="user_sessions-new" class="block">
+<div id="sessions-new" class="block">
   <h2><%= yield :title %></h2>
   <div class="content form">
-    <% semantic_form_for @user_session, :url => user_session_path do |f| -%>
+    <% semantic_form_for @session, :url => session_path do |f| -%>
       <% f.inputs do -%>
         <%= f.input :login, :required => false%>
         <%= f.input :password, :required => false%>

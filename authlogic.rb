@@ -55,7 +55,7 @@ environment('config.active_record.observers = :user_observer')
 
 # Get controllers
 controller "application_controller.rb"
-controller "user_sessions_controller.rb"
+controller "sessions_controller.rb"
 controller "users_controller.rb"
 controller "password_resets_controller.rb"
 controller 'home_controller.rb'
@@ -65,7 +65,7 @@ view "users", "new.html.#{templating_engine}"
 view "users", "edit.html.#{templating_engine}"
 view 'users', "_semantic_form.html.#{templating_engine}"
 view "users", "show.html.#{templating_engine}"
-view "user_sessions", "new.html.#{templating_engine}"
+view "sessions", "new.html.#{templating_engine}"
 view "user_mailer", "activation.text.html.#{templating_engine}"
 view "user_mailer", "reset_password_instructions.text.html.#{templating_engine}"
 view "user_mailer", "signup_notification.text.html.#{templating_engine}"
@@ -116,7 +116,7 @@ if requested? :bdd
   spec 'models/user_spec.rb'
   spec 'models/user_mailer_spec.rb'
   spec 'controllers/users_controller_spec.rb'
-  spec 'controllers/user_sessions_controller_spec.rb'
+  spec 'controllers/sessions_controller_spec.rb'
   spec 'controllers/password_resets_controller_spec.rb'
   spec 'helpers/layout_helper_spec.rb'
   spec "helpers/#{templating_engine}_helper_spec.rb"

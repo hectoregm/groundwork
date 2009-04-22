@@ -47,7 +47,7 @@ module ControllerSpecHelper
 
       it "should redirect to login page with logged out user" do
         get get_action
-        should redirect_to(new_user_session_url)
+        should redirect_to(login_path)
       end
 
       it "should have /must be logged in/ in the flash with logged out user" do

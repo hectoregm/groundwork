@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
       # No redirect if requested page is /logout
       store_location if !(request.request_uri =~ /\/logout$/)
       flash[:error] = t :require_user
-      redirect_to new_user_session_url
+      redirect_to login_path
       return false
     end
   end

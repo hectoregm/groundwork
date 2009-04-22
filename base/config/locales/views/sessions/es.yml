@@ -2,7 +2,7 @@ es:
   login_successful: 'Inicio de sesión exitoso!'
   login_unsuccessful: 'Indentificador y/o contraseña incorrecta.'
   logout_successful: 'Salida exitosa!'
-  user_sessions:
+  sessions:
     new:
       title: 'Ingreso'
       lost_password: '¿Olvido su contraseña?'

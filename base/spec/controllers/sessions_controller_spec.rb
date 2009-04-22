@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper' )
 
-describe UserSessionsController do
+describe SessionsController do
 
   describe "new:" do
 
@@ -11,7 +11,7 @@ describe UserSessionsController do
       UserSession.should_receive(:new).and_return(mock_user_session)
 
       get :new
-      should assign_to(:user_session, :with => mock_user_session)
+      should assign_to(:session, :with => mock_user_session)
     end
 
     it "should render login form" do
@@ -38,17 +38,17 @@ describe UserSessionsController do
       it "should create a session" do
         mock_user_session.should_receive(:save).and_return(true)
 
-        post :create, :user_session => {}
-        should assign_to(:user_session, :with => mock_user_session)
+        post :create, :session => {}
+        should assign_to(:session, :with => mock_user_session)
       end
 
       it "should redirect to account page" do
-        post :create, :user_session => {}
+        post :create, :session => {}
         should redirect_to(account_url)
       end
 
       it "should be successful" do
-        post :create, :user_session => {}
+        post :create, :session => {}
         should set_the_flash(:to => "Login successful!")
       end
 
@@ -63,14 +63,14 @@ describe UserSessionsController do
       end
 
       it "should re-render login form" do
-        post :create, :user_session => {}
+        post :create, :session => {}
         should render_template(:new)
       end
 
       it "should not be successful" do
         mock_user_session.should_receive(:save).and_return(false)
 
-        post :create, :user_session => {}
+        post :create, :session => {}
         should_not set_the_flash(:to => 'Login successful!')
       end
 
@@ -93,16 +93,16 @@ describe UserSessionsController do
       it "should destroy the session" do
         mock_user_session.should_receive(:destroy)
 
-        post :destroy
+        delete :destroy
       end
 
       it "should redirect to login page" do
-        post :destroy
+        delete :destroy
         should redirect_to(login_url)
       end
 
       it "should be successful" do
-        post :destroy
+        delete :destroy
         should set_the_flash(:to => 'Logout successful!')
       end
 
