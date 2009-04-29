@@ -21,7 +21,7 @@ end
 gem 'rspec', :version => '= 1.2.4', :lib => false, :env => 'test'
 gem 'rspec-rails', :version => '= 1.2.4', :lib => false, :env => 'test'
 gem 'webrat', :version => '= 0.4.4', :lib => 'webrat', :env => 'test'
-gem 'cucumber', :version => '= 0.3.0', :env => 'test'
+gem 'cucumber', :version => '= 0.3.1', :env => 'test'
 gem 'remarkable_rails', :lib => false, :env => 'test'
 gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => 'http://gems.github.com'
 gem 'bmabey-email_spec', :version => '>= 0.1.3', :lib => 'email_spec', :env => 'test', :source => 'http://gems.github.com'

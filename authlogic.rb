@@ -17,7 +17,7 @@ end
 gem 'haml' if templating_engine == "haml"
 gem 'rdiscount'
 gem 'justinfrench-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
-gem 'authlogic', :version => "= 2.0.9"
+gem 'authlogic', :version => "= 2.0.11"
 
 # Install gems
 rake 'gems:install', :sudo => true
