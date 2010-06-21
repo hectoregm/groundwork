@@ -23,13 +23,10 @@ gem 'rspec-rails', :version => '= 1.2.4', :lib => false, :env => 'test'
 gem 'webrat', :version => '= 0.4.4', :lib => 'webrat', :env => 'test'
 gem 'cucumber', :version => '= 0.3.1', :env => 'test'
 gem 'remarkable_rails', :lib => false, :env => 'test'
-gem 'spicycode-rcov', :lib => 'rcov', :env => 'test', :source => 'http://gems.github.com'
-gem 'bmabey-email_spec', :version => '>= 0.1.3', :lib => 'email_spec', :env => 'test', :source => 'http://gems.github.com'
-gem 'sevenwire-forgery', :lib => 'forgery', :env => 'test', :source => 'http://gems.github.com'
-gem 'notahat-machinist', :lib => 'machinist', :env => 'test', :source => "http://gems.github.com"
-
-# Install gems
-rake 'gems:install', :sudo => true, :env => 'test'
+gem 'rcov', :lib => 'rcov', :env => 'test'
+gem 'email_spec', :version => '>= 0.1.3', :lib => 'email_spec', :env => 'test'
+gem 'forgery', :lib => 'forgery', :env => 'test'
+gem 'machinist', :lib => 'machinist', :env => 'test'
 
 # Generate files
 generate :cucumber

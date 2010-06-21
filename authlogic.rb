@@ -16,11 +16,8 @@ end
 # Add gem dependencies
 gem 'haml' if templating_engine == "haml"
 gem 'rdiscount'
-gem 'justinfrench-formtastic', :lib => 'formtastic', :source  => 'http://gems.github.com'
+gem 'formtastic', :lib => 'formtastic'
 gem 'authlogic', :version => "= 2.0.11"
-
-# Install gems
-rake 'gems:install', :sudo => true
 
 # Haml setup
 run("haml --rails .") if templating_engine == "haml"

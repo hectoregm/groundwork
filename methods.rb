@@ -1,5 +1,5 @@
 # Convenience Methods
-FEATURES = [:git, :bdd, :authlogic]
+FEATURES = [:git, :bundler, :bdd, :authlogic]
 TEMPLATING_ENGINE = "haml"
 
 def get_base_path(relative_destination)
